@@ -49,28 +49,33 @@ const Home = ({ achievements, projects, packages }) => {
   const skills = [
     {
       type: 'SKILL',
+      label: 'TypeScript',
+      icon: 'fab fa-js-square',
+    },
+    {
+      type: 'SKILL',
+      label: 'JavaScript',
+      icon: 'fab fa-js-square',
+    },
+    {
+      type: 'SKILL',
+      label: 'PHP',
+      icon: 'fab fa-php',
+    },
+    {
+      type: 'SKILL',
       label: 'HTML',
       icon: 'fab fa-html5',
     },
     {
       type: 'SKILL',
       label: '(JSX|TSX)',
-      icon: 'fab fa-html5',
-    },
-    {
-      type: 'SKILL',
-      label: 'CSS',
-      icon: 'fab fa-css3-alt',
-    },
-    {
-      type: 'SKILL',
-      label: 'SCSS',
-      icon: 'fab fa-sass',
-    },
-    {
-      type: 'SKILL',
-      label: 'JavaScript',
       icon: 'fab fa-js-square',
+    },
+    {
+      type: 'SKILL',
+      label: '(SA|C)SS',
+      icon: 'fab fa-sass',
     },
     {
       type: 'FRAMEWORK',
@@ -84,7 +89,17 @@ const Home = ({ achievements, projects, packages }) => {
     },
     {
       type: 'FRAMEWORK',
-      label: 'Bootstrap (4|5)',
+      label: 'Angular',
+      icon: 'fab fa-angular',
+    },
+    {
+      type: 'FRAMEWORK',
+      label: 'DiscordJS',
+      icon: 'fab fa-discord',
+    },
+    {
+      type: 'FRAMEWORK',
+      label: 'Bootstrap',
       icon: 'fab fa-bootstrap',
     },
     {

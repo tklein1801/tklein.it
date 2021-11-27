@@ -548,10 +548,8 @@ section:first-child {
     height: unset;
     padding: 1rem;
   }
-  aside img {
+  aside .pic-container {
     display: none;
-    width: 35%;
-    margin-bottom: 0;
   }
   main {
     width: 100%;

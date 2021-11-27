@@ -439,10 +439,8 @@ section {
     height: unset;
     padding: 1rem;
 
-    img {
+    .pic-container {
       display: none;
-      width: 35%;
-      margin-bottom: 0;
     }
   }
   main {

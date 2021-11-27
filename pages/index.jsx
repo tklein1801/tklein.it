@@ -38,7 +38,7 @@ const Home = ({ achievements, projects, packages }) => {
     },
     {
       label: 'My packages',
-      reference: '#my-projects',
+      reference: '#my-packages',
     },
     {
       label: 'Contact me',

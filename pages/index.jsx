@@ -19,7 +19,7 @@ const Home = ({ achievements, projects, packages }) => {
     },
     {
       label: 'Source Code',
-      reference: 'https://github.com/tklein1801/tklein1801.github.io',
+      reference: 'https://github.com/tklein1801/tklein.it',
     },
     {
       label: 'Contact me',

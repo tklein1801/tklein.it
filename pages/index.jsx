@@ -258,7 +258,7 @@ const Home = ({ achievements, projects, packages }) => {
             </h1>
             <div id="projects">
               {projects.length > 0 ? (
-                projects.map((project) => <Project project={project} />)
+                projects.map((project) => <Project key={project.url} project={project} />)
               ) : (
                 <NoResults text="No projects found" />
               )}
@@ -271,7 +271,7 @@ const Home = ({ achievements, projects, packages }) => {
             </h1>
             <div id="packages">
               {packages.results.length > 0 ? (
-                packages.results.map((pck) => <Package content={pck} />)
+                packages.results.map((pck) => <Package key={pck.package.name} content={pck} />)
               ) : (
                 <NoResults text="No packages found" />
               )}

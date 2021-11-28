@@ -6,33 +6,33 @@ export const Project = ({ project }) => {
   const fork_url = repo_url + '/network/members';
 
   return (
-    <div class="project-card">
+    <div className="project-card">
       <div>
-        <h4 class="repo-name">
-          <a href={owner_url} class="repo-link">
+        <h4 className="repo-name">
+          <a href={owner_url} className="repo-link">
             @{owner.login}
           </a>
           /
-          <a href={repo_url} class="repo-link">
+          <a href={repo_url} className="repo-link">
             {name}
           </a>
         </h4>
-        <p class="repo-description">{description || 'No description'}</p>
-        <div class="repo-info row">
+        <p className="repo-description">{description || 'No description'}</p>
+        <div className="repo-info row">
           <div>
             <p>{primaryLanguage.name}</p>
           </div>
 
           <div>
-            <a href={stargazer_url} class="repo-link row">
-              <i class="far fa-star"></i>
+            <a href={stargazer_url} className="repo-link row">
+              <i className="far fa-star"></i>
               <p>{stargazerCount}</p>
             </a>
           </div>
 
           <div>
-            <a href={fork_url} class="repo-link row">
-              <i class="fas fa-code-branch"></i>
+            <a href={fork_url} className="repo-link row">
+              <i className="fas fa-code-branch"></i>
               <p>{forkCount}</p>
             </a>
           </div>

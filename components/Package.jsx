@@ -1,9 +1,9 @@
 export const Package = ({ content }) => {
   return (
-    <div class="package-card">
+    <div className="package-card">
       <div>
-        <h4 class="repo-name mb-0">
-          <a href={content.package.links.npm} class="repo-link">
+        <h4 className="repo-name mb-0">
+          <a href={content.package.links.npm} className="repo-link">
             {content.package.name} v{content.package.version}
           </a>
         </h4>

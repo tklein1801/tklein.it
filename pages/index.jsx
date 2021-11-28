@@ -290,6 +290,7 @@ export async function getStaticProps() {
     'A3RLRPG-Infopanel',
     'DulliBot',
     'tklein1801.github.io',
+    'tklein.it',
     'BBS-Mitfahrzentrale',
     'BBS-Grid-Website',
   ];

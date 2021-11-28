@@ -300,7 +300,7 @@ export async function getStaticProps() {
       'Content-Type': 'application/json',
       'User-Agent':
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36',
-      Authorization: 'token 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',
+      Authorization: 'token ' + process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
     },
     body: '{"query":"{\\n  viewer {\\n    createdAt\\n    issues {\\n      totalCount\\n   \\t}\\n    followers {\\n      totalCount\\n    }\\n    repositories(first: 100, affiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER], orderBy: {field: UPDATED_AT, direction: DESC}) {\\n      totalCount\\n      pageInfo {\\n        endCursor\\n        hasNextPage\\n      }\\n      nodes {\\n        owner {\\n          login\\n        }\\n        isPrivate\\n        url\\n        name\\n        description\\n        stargazerCount\\n        forkCount\\n        primaryLanguage {\\n          name\\n          color\\n        }\\n        updatedAt\\n      }\\n    }\\n  }\\n}\\n"}',
   });
@@ -320,7 +320,5 @@ export async function getStaticProps() {
   // NPM Packages
   const package_request = await fetch('https://api.npms.io/v2/search?q=author:tklein1801');
   const packages = await package_request.json();
-
-  console.log(achievements, projects, packages);
   return { props: { achievements, projects, packages } };
 }

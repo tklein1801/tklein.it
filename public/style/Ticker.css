@@ -9,8 +9,7 @@
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
   overflow: scroll;
-  padding: 0.5rem 0;
-  background-color: #1a1a1a;
+  background-color: #222222;
 }
 
 .ticker-container::-webkit-scrollbar {

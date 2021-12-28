@@ -183,6 +183,7 @@ section {
 }
 
 .header {
+  margin-bottom: 0;
   background-image: url('../bg.jpg');
   background-size: cover;
   background-position: center;
@@ -454,6 +455,7 @@ section {
   .header nav {
     padding: 1.5em;
   }
+
   #about {
     .row {
       flex-direction: column-reverse;

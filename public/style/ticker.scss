@@ -1,0 +1,44 @@
+.ticker-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: scroll;
+  padding: 0.5rem 0;
+  background-color: darken($color: #1a1a1a, $amount: 0.1);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.stock {
+  min-width: 9em;
+  margin: 0.5rem;
+  color: unset !important;
+
+  .name-currency {
+    margin-bottom: 0.2rem;
+    font-weight: 400;
+    font-size: 80%;
+  }
+
+  .current-price {
+    width: min-content;
+    margin-bottom: 0.2rem;
+    padding: 0.3rem 0.5rem;
+    font-weight: 500;
+    font-size: 85%;
+    background-color: #1a1a1a;
+    border-radius: 6px;
+  }
+
+  .change {
+    font-size: 80%;
+    &.positive {
+      color: #02d463;
+    }
+    &.negative {
+      color: red;
+    }
+  }
+}

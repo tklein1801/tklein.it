@@ -1,13 +1,14 @@
-import Head from 'next/head';
 import Image from 'next/image';
 // Components
+import { HeadTemplate } from '../components/HeadTemplate';
+import StockContainer from '../components/Ticker';
 import { NoResults } from '../components/NoResults';
 import { Project } from '../components/Project';
 import { Package } from '../components/Package';
 // Assets
 import profilePic from '../public/me.jpg';
 
-const Home = ({ achievements, projects, packages }) => {
+const Home = ({ crypto, achievements, projects, packages }) => {
   const sidebar_links = [
     {
       label: 'GitHub',
@@ -121,25 +122,7 @@ const Home = ({ achievements, projects, packages }) => {
 
   return (
     <div className="wrapper">
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#02d463" />
-        <meta property="og:image" content="/me.jpg" />
-        <meta property="og:type" content="website" />
-        <link rel="icon" type="image/jpg" sizes="500x500" href="/me.jpg" />
-        <title>Thorben Klein</title>
-        <meta name="description" content="Information about Thorben Klein" />
-        <link rel="stylesheet" href="/style/master.css" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
-      </Head>
+      <HeadTemplate />
 
       <div className="wrapper">
         <aside>
@@ -172,6 +155,8 @@ const Home = ({ achievements, projects, packages }) => {
               ))}
             </nav>
           </section>
+
+          <StockContainer crypto={crypto} />
 
           <section id="about">
             <div className="row">
@@ -321,5 +306,17 @@ export async function getStaticProps() {
   // NPM Packages
   const package_request = await fetch('https://api.npms.io/v2/search?q=author:tklein1801');
   const packages = await package_request.json();
-  return { props: { achievements, projects, packages } };
+
+  // Crypto data
+  const crypto_req = await fetch(
+    'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=20&convert=EUR',
+    {
+      method: 'GET',
+      headers: {
+        'X-CMC_PRO_API_KEY': process.env.COINMARKETCAP,
+      },
+    }
+  );
+  const crypto = await crypto_req.json();
+  return { props: { crypto, achievements, projects, packages } };
 }

@@ -90,11 +90,6 @@ const Home = ({ crypto, achievements, projects, packages }) => {
     },
     {
       type: 'FRAMEWORK',
-      label: 'Angular',
-      icon: 'fab fa-angular',
-    },
-    {
-      type: 'FRAMEWORK',
       label: 'DiscordJS',
       icon: 'fab fa-discord',
     },

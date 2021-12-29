@@ -265,7 +265,7 @@ const Home = ({ crypto, achievements, projects, packages }) => {
 
 export default Home;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const WANTED_REPOS = [
     'A3RLRPG-Infopanel',
     'DulliBot',

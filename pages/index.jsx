@@ -151,7 +151,7 @@ const Home = ({ crypto, achievements, projects, packages }) => {
             </nav>
           </section>
 
-          <StockContainer crypto={crypto} />
+          {/* <StockContainer crypto={crypto} /> */}
 
           <section id="about">
             <div className="row">

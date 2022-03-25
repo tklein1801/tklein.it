@@ -164,8 +164,8 @@ const Home = ({ crypto, achievements, projects, packages }) => {
                   <a href="https://www.tchibo-karriere.de/karriere?gclid=CjwKCAjw-sqKBhBjEiwAVaQ9a6fhBbYIKNhbnMPBZA1ksit9o4VvcPldBhoTcReC1r5J4KKCkatMVhoC82QQAvD_BwE">
                     Tchibo GmbH
                   </a>{' '}
-                  who's doing some programming & other random stuff. On this website you can have a
-                  look on projects & some other stuff I made in the past...
+                  who's doing some programming & other random stuff(I do some SAP development too). On this website you can have a
+                  look on projects & some other stuff I've in the past...
                 </p>
 
                 <div id="skills-container">

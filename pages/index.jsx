@@ -1,10 +1,10 @@
 import Image from 'next/image';
 // Components
 import { HeadTemplate } from '../components/HeadTemplate';
-import StockContainer from '../components/Ticker';
 import { NoResults } from '../components/NoResults';
 import { Project } from '../components/Project';
 import { Package } from '../components/Package';
+// import StockContainer from '../components/Ticker';
 // Assets
 import profilePic from '../public/me.jpg';
 

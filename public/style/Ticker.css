@@ -1,13 +1,7 @@
 .ticker-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
   overflow: scroll;
   background-color: #222222;
 }
@@ -29,8 +23,6 @@
 }
 
 .stock .current-price {
-  width: -webkit-min-content;
-  width: -moz-min-content;
   width: min-content;
   margin-bottom: 0.2rem;
   padding: 0.3rem 0.5rem;
@@ -51,4 +43,4 @@
 .stock .change.negative {
   color: red;
 }
-/*# sourceMappingURL=Ticker.css.map */
+/*# sourceMappingURL=ticker.css.map */

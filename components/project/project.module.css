@@ -1,0 +1,31 @@
+.projectGrid {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+
+@media (max-width: 786px) {
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.projectDescription {
+  margin-top: 0.4rem;
+}
+
+.projectDescription,
+.projectInfoContainer p {
+  font-size: 90%;
+}
+
+.projectInfoContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 0.4rem;
+}
+
+.projectInfoContainer .label {
+  margin-left: 0.5rem;
+}

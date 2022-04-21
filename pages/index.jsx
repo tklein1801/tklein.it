@@ -6,6 +6,7 @@ import { ProjectContainer } from '../components/project/project.component';
 import { PackageContainer } from '../components/project/package.component';
 // Assets
 import profilePic from '../public/me.jpg';
+import { Timeline } from '../components/experience/experience.component';
 
 const Home = ({ crypto, achievements, projects, packages }) => {
   const sidebar_links = [
@@ -222,6 +223,7 @@ const Home = ({ crypto, achievements, projects, packages }) => {
             </div>
           </section>
 
+          <Timeline />
           <ProjectContainer projects={projects} />
           <PackageContainer packages={packages.results} />
         </main>

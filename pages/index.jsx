@@ -1,12 +1,12 @@
 import Image from 'next/image';
 // Components
 import { HeadTemplate } from '../components/HeadTemplate';
-import StockContainer from '../components/Ticker';
-import { NoResults } from '../components/NoResults';
-import { Project } from '../components/Project';
-import { Package } from '../components/Package';
+// import StockContainer from '../components/Ticker';
+import { ProjectContainer } from '../components/project/project.component';
+import { PackageContainer } from '../components/project/package.component';
 // Assets
 import profilePic from '../public/me.jpg';
+import { Timeline } from '../components/experience/experience.component';
 
 const Home = ({ crypto, achievements, projects, packages }) => {
   const sidebar_links = [
@@ -32,6 +32,10 @@ const Home = ({ crypto, achievements, projects, packages }) => {
     {
       label: 'About me',
       reference: '#about-me',
+    },
+    {
+      label: 'Experience',
+      reference: '#experience',
     },
     {
       label: 'My projects',
@@ -70,11 +74,6 @@ const Home = ({ crypto, achievements, projects, packages }) => {
     },
     {
       type: 'SKILL',
-      label: '(JSX|TSX)',
-      icon: 'fab fa-js-square',
-    },
-    {
-      type: 'SKILL',
       label: '(SA|C)SS',
       icon: 'fab fa-sass',
     },
@@ -99,13 +98,18 @@ const Home = ({ crypto, achievements, projects, packages }) => {
       icon: 'fab fa-bootstrap',
     },
     {
-      type: 'FRAMEWORK',
+      type: 'SKILL',
       label: 'SQL',
       icon: 'fa fa-database',
     },
     {
       type: 'FRAMEWORK',
       label: 'Firebase',
+      icon: 'fa fa-database',
+    },
+    {
+      type: 'FRAMEWORK',
+      label: 'Supabase',
       icon: 'fa fa-database',
     },
     {
@@ -156,16 +160,15 @@ const Home = ({ crypto, achievements, projects, packages }) => {
           <section id="about">
             <div className="row">
               <div>
-                <h1 id="about-me" className="anchored">
-                  About me
-                </h1>
+                <h1 id="about-me">About me</h1>
                 <p>
-                  Hello! I'm just a little apprentice @{' '}
+                  Hi! I'm just a little apprentice @{' '}
                   <a href="https://www.tchibo-karriere.de/karriere?gclid=CjwKCAjw-sqKBhBjEiwAVaQ9a6fhBbYIKNhbnMPBZA1ksit9o4VvcPldBhoTcReC1r5J4KKCkatMVhoC82QQAvD_BwE">
                     Tchibo GmbH
-                  </a>{' '}
-                  who's doing some programming & other random stuff(I do some SAP development too). On this website you can have a
-                  look on projects & some other stuff I've in the past...
+                  </a>
+                  , dealing with programming and other things (currently I'm taking a look at
+                  development with <a href="//www.sap.com">SAP</a>). On this website you can have a
+                  look at projects & other stuff I did in the past...
                 </p>
 
                 <div id="skills-container">
@@ -188,30 +191,22 @@ const Home = ({ crypto, achievements, projects, packages }) => {
                   ))}
 
                   <div className="skill-column achievements">
-                    <h4 className="anchored">Achievements</h4>
+                    <h4>Achievements</h4>
                     <div id="achievement">
                       <div className="stats-card">
-                        <h5 id="total-projects" className="count">
-                          {achievements.projects}
-                        </h5>
+                        <h5 className="count">{achievements.projects}</h5>
                         <p className="label">Total Projects</p>
                       </div>
                       <div className="stats-card">
-                        <h5 id="issues" className="count">
-                          {achievements.issues}
-                        </h5>
+                        <h5 className="count">{achievements.issues}</h5>
                         <p className="label">Issues Resolved</p>
                       </div>
                       <div className="stats-card">
-                        <h5 id="followers" className="count">
-                          {achievements.followers}
-                        </h5>
+                        <h5 className="count">{achievements.followers}</h5>
                         <p className="label">GitHub Followers</p>
                       </div>
                       <div className="stats-card">
-                        <h5 id="experience" className="count">
-                          {achievements.experience}
-                        </h5>
+                        <h5 className="count">{achievements.experience}</h5>
                         <p className="label">Years Experience</p>
                       </div>
                     </div>
@@ -232,31 +227,9 @@ const Home = ({ crypto, achievements, projects, packages }) => {
             </div>
           </section>
 
-          <section>
-            <h1 id="my-projects" className="anchored">
-              My projects
-            </h1>
-            <div id="projects">
-              {projects.length > 0 ? (
-                projects.map((project) => <Project key={project.url} project={project} />)
-              ) : (
-                <NoResults text="No projects found" />
-              )}
-            </div>
-          </section>
-
-          <section>
-            <h1 id="my-packages" className="anchored">
-              My npm-packages
-            </h1>
-            <div id="packages">
-              {packages.results.length > 0 ? (
-                packages.results.map((pck) => <Package key={pck.package.name} content={pck} />)
-              ) : (
-                <NoResults text="No packages found" />
-              )}
-            </div>
-          </section>
+          <Timeline />
+          <ProjectContainer projects={projects} />
+          <PackageContainer packages={packages.results} />
         </main>
       </div>
     </div>

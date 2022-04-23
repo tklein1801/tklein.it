@@ -158,13 +158,13 @@ const Home = ({ crypto, achievements, projects, packages }) => {
               <div>
                 <h1 id="about-me">About me</h1>
                 <p>
-                  Hello! I'm just a little apprentice @{' '}
+                  Hi! I'm just a little apprentice @{' '}
                   <a href="https://www.tchibo-karriere.de/karriere?gclid=CjwKCAjw-sqKBhBjEiwAVaQ9a6fhBbYIKNhbnMPBZA1ksit9o4VvcPldBhoTcReC1r5J4KKCkatMVhoC82QQAvD_BwE">
                     Tchibo GmbH
-                  </a>{' '}
-                  who's doing some programming & other random stuff(I do some SAP development too).
-                  On this website you can have a look on projects & some other stuff I've in the
-                  past...
+                  </a>
+                  , dealing with programming and other things (currently I'm taking a look at
+                  development with <a href="//www.sap.com">SAP</a>). On this website you can have a
+                  look at projects & other stuff I did in the past...
                 </p>
 
                 <div id="skills-container">

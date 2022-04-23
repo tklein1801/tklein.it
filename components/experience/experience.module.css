@@ -111,7 +111,7 @@
   .container {
     width: 100%;
     padding-left: 49px;
-    padding-right: 25px;
+    padding-right: 0px;
   }
 
   /* Make all arrows pointing to the left */
@@ -131,5 +131,15 @@
   /* Transform right container to left positioned containers */
   .right {
     left: 0%;
+  }
+
+  .year {
+    font-size: 85%;
+  }
+  .headline {
+    font-size: 100%;
+  }
+  .description {
+    font-size: 85%;
   }
 }

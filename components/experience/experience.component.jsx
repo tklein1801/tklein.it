@@ -24,7 +24,7 @@ export const Timeline = () => {
 
   return (
     <section>
-      <h1>Experience</h1>
+      <h1 id="experience">Experience</h1>
 
       <div className={style.timeline}>
         {events.map((element, index) => (

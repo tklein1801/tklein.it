@@ -34,6 +34,10 @@ const Home = ({ crypto, achievements, projects, packages }) => {
       reference: '#about-me',
     },
     {
+      label: 'Experience',
+      reference: '#experience',
+    },
+    {
       label: 'My projects',
       reference: '#my-projects',
     },

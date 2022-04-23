@@ -70,11 +70,6 @@ const Home = ({ crypto, achievements, projects, packages }) => {
     },
     {
       type: 'SKILL',
-      label: '(JSX|TSX)',
-      icon: 'fab fa-js-square',
-    },
-    {
-      type: 'SKILL',
       label: '(SA|C)SS',
       icon: 'fab fa-sass',
     },
@@ -99,13 +94,18 @@ const Home = ({ crypto, achievements, projects, packages }) => {
       icon: 'fab fa-bootstrap',
     },
     {
-      type: 'FRAMEWORK',
+      type: 'SKILL',
       label: 'SQL',
       icon: 'fa fa-database',
     },
     {
       type: 'FRAMEWORK',
       label: 'Firebase',
+      icon: 'fa fa-database',
+    },
+    {
+      type: 'FRAMEWORK',
+      label: 'Supabase',
       icon: 'fa fa-database',
     },
     {

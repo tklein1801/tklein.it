@@ -28,10 +28,10 @@ export const Project = ({ data }) => {
   return (
     <Card>
       <p className={card.cardTitle}>
-        <a href={owner_url} className="repo-link">
+        {/* <a href={owner_url} className="repo-link">
           @{owner.login}
         </a>
-        /
+        / */}
         <a href={repo_url} className="repo-link">
           {name}
         </a>

@@ -5,7 +5,6 @@ import { Card } from '../card/card.component';
 import { NoResults } from '../NoResults';
 
 export const PackageContainer = ({ packages }) => {
-  console.log(packages);
   return (
     <section>
       <h1 id="my-packages">My packages</h1>

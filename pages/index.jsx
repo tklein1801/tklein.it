@@ -133,6 +133,7 @@ const Home = ({ crypto, achievements, projects, packages }) => {
                 alt="Picture of mine"
                 layout="responsive"
                 placeholder="blur"
+                priority
               />
             </div>
             <h2 className="name">Thorben Klein</h2>
@@ -224,6 +225,7 @@ const Home = ({ crypto, achievements, projects, packages }) => {
                     alt="Picture of mine"
                     layout="responsive"
                     placeholder="blur"
+                    priority
                   />
                 </div>
               </div>

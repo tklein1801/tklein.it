@@ -11,7 +11,7 @@ export const ProjectContainer = ({ projects }) => {
 
       <div className={style.projectGrid}>
         {projects.length > 0 ? (
-          projects.map((project) => <Project data={project} />)
+          projects.map((project, index) => <Project key={index} data={project} />)
         ) : (
           <NoResults text="No projects found" />
         )}

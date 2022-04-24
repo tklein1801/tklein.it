@@ -215,6 +215,10 @@ section:first-child {
   margin-left: 1.5rem;
 }
 
+#about {
+  margin-top: 1rem;
+}
+
 #about p {
   margin-top: 1em;
 }

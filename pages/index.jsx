@@ -1,7 +1,7 @@
 import Image from 'next/image';
 // Components
 import { HeadTemplate } from '../components/HeadTemplate';
-// import StockContainer from '../components/Ticker';
+import { StockContainer } from '../components/stock/stock.component,';
 import { ProjectContainer } from '../components/project/project.component';
 import { PackageContainer } from '../components/project/package.component';
 // Assets
@@ -119,6 +119,8 @@ const Home = ({ crypto, achievements, projects, packages }) => {
     },
   ];
 
+  console.log(crypto);
+
   return (
     <div className="wrapper">
       <HeadTemplate />
@@ -155,7 +157,7 @@ const Home = ({ crypto, achievements, projects, packages }) => {
             </nav>
           </section>
 
-          {/* <StockContainer crypto={crypto} /> */}
+          <StockContainer crypto={crypto} />
 
           <section id="about">
             <div className="row">

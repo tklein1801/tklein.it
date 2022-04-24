@@ -11,7 +11,7 @@ export const PackageContainer = ({ packages }) => {
 
       <div className={style.projectGrid}>
         {packages.length > 0 ? (
-          packages.map((pck) => <Package data={pck} />)
+          packages.map((pck, index) => <Package key={index} data={pck} />)
         ) : (
           <NoResults text="No packages found" />
         )}

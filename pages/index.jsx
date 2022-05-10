@@ -244,13 +244,15 @@ export async function getServerSideProps() {
   const WANTED_REPOS = [
     'A3RLRPG-Infopanel',
     'DulliBot',
-    'tklein1801.github.io',
+    // 'tklein1801.github.io',
     'tklein.it',
     'BBS-Mitfahrzentrale',
     'BBS-Grid-Website',
+    'Budget-Buddy',
   ];
 
-  const req = await fetch('https://api.github.com/graphql', {
+  let request, response;
+  request = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -260,8 +262,8 @@ export async function getServerSideProps() {
     },
     body: '{"query":"{\\n  viewer {\\n    createdAt\\n    issues {\\n      totalCount\\n   \\t}\\n    followers {\\n      totalCount\\n    }\\n    repositories(first: 100, affiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER], orderBy: {field: UPDATED_AT, direction: DESC}) {\\n      totalCount\\n      pageInfo {\\n        endCursor\\n        hasNextPage\\n      }\\n      nodes {\\n        owner {\\n          login\\n        }\\n        isPrivate\\n        url\\n        name\\n        description\\n        stargazerCount\\n        forkCount\\n        primaryLanguage {\\n          name\\n          color\\n        }\\n        updatedAt\\n      }\\n    }\\n  }\\n}\\n"}',
   });
-  const res = await req.json();
-  const data = res.data.viewer;
+  response = await request.json();
+  const data = response.data.viewer;
   const achievements = {
     projects: data.repositories.totalCount,
     issues: data.issues.totalCount,
@@ -274,11 +276,11 @@ export async function getServerSideProps() {
   );
 
   // NPM Packages
-  const package_request = await fetch('https://api.npms.io/v2/search?q=author:tklein1801');
-  const packages = await package_request.json();
+  request = await fetch('https://api.npms.io/v2/search?q=author:tklein1801');
+  const packages = await request.json();
 
   // Crypto data
-  const crypto_req = await fetch(
+  request = await fetch(
     'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=20&convert=EUR',
     {
       method: 'GET',
@@ -287,6 +289,6 @@ export async function getServerSideProps() {
       },
     }
   );
-  const crypto = await crypto_req.json();
+  const crypto = await request.json();
   return { props: { crypto, achievements, projects, packages } };
 }

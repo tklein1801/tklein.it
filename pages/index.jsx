@@ -243,7 +243,7 @@ const Home = ({ crypto, achievements, projects, packages }) => {
 export default Home;
 
 export async function getServerSideProps() {
-  let response, request;
+  let request, response;
   request = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {

@@ -242,7 +242,7 @@ export default Home;
 
 export async function getServerSideProps() {
   const WANTED_REPOS = [
-    'A3RLRPG-Infopanel',
+    'A3RLRPG-Infoapp',
     'DulliBot',
     // 'tklein1801.github.io',
     'tklein.it',

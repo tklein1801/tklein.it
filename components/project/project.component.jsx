@@ -21,18 +21,16 @@ export const ProjectContainer = ({ projects }) => {
 };
 
 export const Project = ({ data }) => {
-  const { owner, name, description, primaryLanguage, stargazerCount, forkCount } = data;
-  const owner_url = 'https://github.com/' + owner.login;
-  const repo_url = owner_url + '/' + name;
+  const { owner, name, description, url, primaryLanguage, stargazerCount, forkCount } = data;
 
   return (
     <Card>
       <p className={card.cardTitle}>
-        {/* <a href={owner_url} className="repo-link">
+        <a href={`https://github.com/${owner.login}`} className="repo-link">
           @{owner.login}
         </a>
-        / */}
-        <a href={repo_url} className="repo-link">
+        /
+        <a href={url} className="repo-link">
           {name}
         </a>
       </p>
@@ -41,7 +39,17 @@ export const Project = ({ data }) => {
 
       <div className={style.projectInfoContainer}>
         <div>
-          <p>{primaryLanguage.name}</p>
+          <span
+            style={{
+              borderRadius: '8px',
+              padding: '.2rem .5rem',
+              fontSize: '.8rem',
+              backgroundColor: primaryLanguage.color,
+              color: primaryLanguage.color === '#f1e05a' ? 'black' : 'white',
+            }}
+          >
+            {primaryLanguage.name}
+          </span>
         </div>
         <div>
           <p>

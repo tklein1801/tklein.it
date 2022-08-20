@@ -7,6 +7,7 @@ import { PackageContainer } from '../components/project/package.component';
 // Assets
 import profilePic from '../public/me.jpg';
 import { Timeline } from '../components/experience/experience.component';
+import { AchievementWrapper } from '../components/archievement/archievement.component';
 
 const Home = ({ crypto, achievements, projects, packages }) => {
   const sidebar_links = [
@@ -174,7 +175,7 @@ const Home = ({ crypto, achievements, projects, packages }) => {
                 <div id="skills-container">
                   {[
                     { heading: 'Skills I own...', content: 'SKILL' },
-                    { heading: 'Frameworks', content: 'FRAMEWORK' },
+                    { heading: 'Frameworks & Libraries', content: 'FRAMEWORK' },
                   ].map((section, index) => (
                     <div key={index} className="skill-column">
                       <h4>{section.heading}</h4>
@@ -192,24 +193,26 @@ const Home = ({ crypto, achievements, projects, packages }) => {
 
                   <div className="skill-column achievements">
                     <h4>Achievements</h4>
-                    <div id="achievement">
-                      <div className="stats-card">
-                        <h5 className="count">{achievements.projects}</h5>
-                        <p className="label">Total Projects</p>
-                      </div>
-                      <div className="stats-card">
-                        <h5 className="count">{achievements.issues}</h5>
-                        <p className="label">Issues Resolved</p>
-                      </div>
-                      <div className="stats-card">
-                        <h5 className="count">{achievements.followers}</h5>
-                        <p className="label">GitHub Followers</p>
-                      </div>
-                      <div className="stats-card">
-                        <h5 className="count">{achievements.experience}</h5>
-                        <p className="label">Years Experience</p>
-                      </div>
-                    </div>
+                    <AchievementWrapper
+                      achievements={[
+                        {
+                          title: achievements.projects,
+                          subtitle: 'Total Projects',
+                        },
+                        {
+                          title: achievements.issues,
+                          subtitle: 'Issues Resolved',
+                        },
+                        {
+                          title: achievements.followers,
+                          subtitle: 'GitHub Follower',
+                        },
+                        {
+                          title: achievements.experience,
+                          subtitle: 'Years Experience',
+                        },
+                      ]}
+                    />
                   </div>
                 </div>
               </div>
@@ -229,7 +232,6 @@ const Home = ({ crypto, achievements, projects, packages }) => {
 
           <Timeline />
           <ProjectContainer projects={projects} />
-          <PackageContainer packages={packages.results} />
         </main>
       </div>
     </div>
@@ -239,17 +241,7 @@ const Home = ({ crypto, achievements, projects, packages }) => {
 export default Home;
 
 export async function getServerSideProps() {
-  const WANTED_REPOS = [
-    'A3RLRPG-Infopanel',
-    'DulliBot',
-    // 'tklein1801.github.io',
-    'tklein.it',
-    'BBS-Mitfahrzentrale',
-    'BBS-Grid-Website',
-    'Budget-Buddy',
-  ];
-
-  let request, response;
+  let response, request;
   request = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
@@ -258,24 +250,20 @@ export async function getServerSideProps() {
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36',
       Authorization: 'token ' + process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
     },
-    body: '{"query":"{\\n  viewer {\\n    createdAt\\n    issues {\\n      totalCount\\n   \\t}\\n    followers {\\n      totalCount\\n    }\\n    repositories(first: 100, affiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER], orderBy: {field: UPDATED_AT, direction: DESC}) {\\n      totalCount\\n      pageInfo {\\n        endCursor\\n        hasNextPage\\n      }\\n      nodes {\\n        owner {\\n          login\\n        }\\n        isPrivate\\n        url\\n        name\\n        description\\n        stargazerCount\\n        forkCount\\n        primaryLanguage {\\n          name\\n          color\\n        }\\n        updatedAt\\n      }\\n    }\\n  }\\n}\\n"}',
+    body: '{"query":"{\\n  viewer {\\n    login\\n    createdAt\\n    issues {\\n      totalCount\\n    }\\n    company\\n    bio\\n    followers {\\n      totalCount\\n    }\\n    repositories {\\n      totalCount\\n    }\\n    pinnedItems(first: 6, types: REPOSITORY) {\\n      edges {\\n        node {\\n          ... on Repository {\\n            id\\n owner {\\n login\\n }\\n            name\\n            description\\n            url\\n            primaryLanguage {\\n              name\\n              color\\n            }\\n            stargazerCount\\n            forkCount\\n          }\\n        }\\n      }\\n    }\\n  }\\n}","variables":{}}',
+    method: 'POST',
   });
   response = await request.json();
-  const data = response.data.viewer;
   const achievements = {
-    projects: data.repositories.totalCount,
-    issues: data.issues.totalCount,
-    followers: data.followers.totalCount,
-    experience:
-      Math.abs(new Date(Date.now() - new Date(data.createdAt)).getUTCFullYear() - 1971) + `+`,
+    projects: response.data.viewer.repositories.totalCount,
+    issues: response.data.viewer.issues.totalCount,
+    followers: response.data.viewer.followers.totalCount,
+    experience: Math.abs(
+      new Date(Date.now() - new Date(response.data.viewer.createdAt)).getUTCFullYear() - 1971
+    ),
   };
-  const projects = data.repositories.nodes.filter((repository) =>
-    WANTED_REPOS.includes(repository.name)
-  );
 
-  // NPM Packages
-  request = await fetch('https://api.npms.io/v2/search?q=author:tklein1801');
-  const packages = await request.json();
+  const projects = response.data.viewer.pinnedItems.edges.map((node) => ({ ...node.node }));
 
   // Crypto data
   request = await fetch(
@@ -288,5 +276,5 @@ export async function getServerSideProps() {
     }
   );
   const crypto = await request.json();
-  return { props: { crypto, achievements, projects, packages } };
+  return { props: { crypto, achievements, projects } };
 }

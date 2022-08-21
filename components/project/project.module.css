@@ -12,7 +12,7 @@
 }
 
 .projectDescription {
-  margin-top: 0.4rem;
+  margin: 0.4rem 0;
 }
 
 .projectDescription,
@@ -23,7 +23,7 @@
 .projectInfoContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 0.4rem;
+  margin-top: auto;
 }
 
 .projectInfoContainer .label {

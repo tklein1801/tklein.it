@@ -8,6 +8,7 @@ import { PackageContainer } from '../components/project/package.component';
 import profilePic from '../public/me.jpg';
 import { Timeline } from '../components/experience/experience.component';
 import { AchievementWrapper } from '../components/archievement/archievement.component';
+import { ProjectPromotion } from '../components/project-promotion/project-promotion.component';
 
 const Home = ({ crypto, achievements, projects, packages }) => {
   const sidebar_links = [
@@ -234,6 +235,7 @@ const Home = ({ crypto, achievements, projects, packages }) => {
 
           <Timeline />
           <ProjectContainer projects={projects} />
+          <ProjectPromotion />
         </main>
       </div>
     </div>

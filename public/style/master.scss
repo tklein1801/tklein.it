@@ -89,7 +89,7 @@ p {
     color: rgba($color: $accent, $alpha: 0.8);
   }
 }
-a:not(.repo-link):not(.no-link):not(.anchorjs-link) {
+a:not(.repo-link):not(.no-link):not(.anchorjs-link):not(.normal) {
   z-index: 1;
   position: relative;
   border-bottom: 0;

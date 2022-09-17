@@ -42,11 +42,6 @@ body {
   border-radius: 5px;
 }
 
-::-moz-selection {
-  background: #02d463;
-  color: #fff;
-}
-
 ::selection {
   background: #02d463;
   color: #fff;
@@ -94,14 +89,14 @@ p {
   color: rgba(2, 212, 99, 0.8);
 }
 
-a:not(.repo-link):not(.no-link):not(.anchorjs-link) {
+a:not(.repo-link):not(.no-link):not(.anchorjs-link):not(.normal) {
   z-index: 1;
   position: relative;
   border-bottom: 0;
   color: #02d463;
   text-decoration: none;
 }
-a:not(.repo-link):not(.no-link):not(.anchorjs-link)::before {
+a:not(.repo-link):not(.no-link):not(.anchorjs-link):not(.normal)::before {
   content: "";
   position: absolute;
   left: 0px;
@@ -112,10 +107,10 @@ a:not(.repo-link):not(.no-link):not(.anchorjs-link)::before {
   transition: all 0.2s;
   z-index: -1;
 }
-a:not(.repo-link):not(.no-link):not(.anchorjs-link):hover {
+a:not(.repo-link):not(.no-link):not(.anchorjs-link):not(.normal):hover {
   color: white !important;
 }
-a:not(.repo-link):not(.no-link):not(.anchorjs-link):hover::before {
+a:not(.repo-link):not(.no-link):not(.anchorjs-link):not(.normal):hover::before {
   height: 100%;
   background-color: #02d463;
 }

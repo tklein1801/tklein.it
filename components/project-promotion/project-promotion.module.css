@@ -1,0 +1,35 @@
+.projectPromotion {
+  padding: 3rem;
+  border-radius: 8px;
+  background: rgb(2, 212, 99);
+  background: linear-gradient(
+    135deg,
+    rgba(2, 212, 99, 1) 0%,
+    rgba(2, 212, 99, 1) 25%,
+    rgba(36, 224, 132, 1) 80%,
+    rgba(55, 231, 151, 1) 100%
+  );
+}
+
+.projectInformation {
+  width: 50%;
+}
+
+.projectName {
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.projectDescription {
+  color: #fff !important;
+  margin-bottom: 1.5rem;
+}
+
+.projectLink {
+  padding: 0.9rem 1.3rem;
+  font-size: 80%;
+  font-weight: bolder;
+  color: #333 !important;
+  background-color: #fff;
+  border-radius: 3rem;
+}

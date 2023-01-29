@@ -15,6 +15,7 @@ import { TimelineContainer } from '../components/timeline/timeline.component';
 import MeJpg from '../public/me.jpeg';
 import { getProjects, ProjectContainer } from '../components/project/project.component';
 import Head from 'next/head';
+import { Footer } from '../components/footer/footer.component';
 
 export type HomeProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
@@ -96,6 +97,8 @@ export default function Home({ stocks, achievements, projects }: HomeProps) {
           <TimelineContainer id="my-experience" />
 
           <ProjectContainer id="my-projects" projects={projects} />
+
+          <Footer />
         </main>
       </div>
     </>

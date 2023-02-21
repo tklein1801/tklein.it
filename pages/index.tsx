@@ -15,6 +15,8 @@ import {
   getProjects,
   ProjectContainer,
   Footer,
+  CommitsTimeline,
+  getCommits,
 } from '../components/';
 import styles from '../styles/Home.module.css';
 import MeJpg from '../public/me.jpeg';
@@ -22,7 +24,7 @@ import Head from 'next/head';
 
 export type HomeProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-export default function Home({ stocks, achievements, projects }: HomeProps) {
+export default function Home({ stocks, achievements, projects, commits }: HomeProps) {
   return (
     <>
       <Head>
@@ -97,6 +99,11 @@ export default function Home({ stocks, achievements, projects }: HomeProps) {
             </div>
           </section>
 
+          <section style={{ paddingTop: '0rem' }}>
+            <Heading>Commits</Heading>
+            <CommitsTimeline contributions={commits} />
+          </section>
+
           <TimelineContainer id="my-experience" />
 
           <ProjectContainer id="my-projects" projects={projects} />
@@ -112,5 +119,6 @@ export async function getServerSideProps(context: GetServerSideProps) {
   const stocks = await fetchStockData();
   const achievements = await getAchievements();
   const projects = await getProjects();
-  return { props: { stocks, achievements, projects } };
+  const commits = await getCommits();
+  return { props: { stocks, achievements, projects, commits } };
 }

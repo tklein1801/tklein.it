@@ -17,7 +17,6 @@ section:not(.header):not(.ticker) {
   margin: 0 8em 1em;
 }
 section.header {
-  background-color: green;
   margin-bottom: 0;
   background-image: url('../public/header.jpg');
   background-size: cover;

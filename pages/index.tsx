@@ -1,21 +1,24 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Image from 'next/image';
-import { Link } from '../components/typography/link/link.component';
-import { Sidebar } from '../components/sidebar/sidebar.component';
-import StockWrapper, { fetchStockData } from '../components/stock/stock.component';
-import styles from '../styles/Home.module.css';
-import { Heading, Subheading } from '../components/typography/heading/heading.component';
 import {
+  Link,
+  Sidebar,
+  StockWrapper,
+  fetchStockData,
+  Heading,
+  Subheading,
   Achievement,
   AchievementContainer,
   getAchievements,
-} from '../components/achievement/achievement.component';
-import { SkillContainer } from '../components/skills/skills.component';
-import { TimelineContainer } from '../components/timeline/timeline.component';
+  SkillContainer,
+  TimelineContainer,
+  getProjects,
+  ProjectContainer,
+  Footer,
+} from '../components/';
+import styles from '../styles/Home.module.css';
 import MeJpg from '../public/me.jpeg';
-import { getProjects, ProjectContainer } from '../components/project/project.component';
 import Head from 'next/head';
-import { Footer } from '../components/footer/footer.component';
 
 export type HomeProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 

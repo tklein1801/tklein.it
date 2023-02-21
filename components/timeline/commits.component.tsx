@@ -54,9 +54,6 @@ function determineBackgroundColor(
   highestContribution: number
 ): React.CSSProperties['backgroundColor'] {
   return `rgb(2, 212, 99, ${((commits * 100) / highestContribution / 100).toFixed(2)})`;
-  return commits > 0
-    ? `rgb(2, 212, 99, ${((commits * 100) / highestContribution / 100).toFixed(2)})`
-    : 'rgba(255, 255, 255, 0.4)';
 }
 
 export const Week: React.FC<WeekProps> = ({ week, highestContribution }) => {

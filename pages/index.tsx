@@ -101,7 +101,7 @@ export default function Home({ stocks, achievements, projects, commits }: HomePr
           </section>
 
           <section id="commits" style={{ paddingTop: '0rem' }}>
-            <Heading>Commits</Heading>
+            <Subheading>Commits</Subheading>
             <CommitsTimeline contributions={commits} />
           </section>
 

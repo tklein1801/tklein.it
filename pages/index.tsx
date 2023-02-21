@@ -45,6 +45,7 @@ export default function Home({ stocks, achievements, projects, commits }: HomePr
             <nav>
               {[
                 { label: 'About me', ref: '#about-me' },
+                { label: 'Commits', ref: '#commits' },
                 { label: 'Experience', ref: '#my-experience' },
                 { label: 'My projects', ref: '#my-projects' },
                 { label: 'Contact me', ref: '#contact-me' },
@@ -99,7 +100,7 @@ export default function Home({ stocks, achievements, projects, commits }: HomePr
             </div>
           </section>
 
-          <section style={{ paddingTop: '0rem' }}>
+          <section id="commits" style={{ paddingTop: '0rem' }}>
             <Heading>Commits</Heading>
             <CommitsTimeline contributions={commits} />
           </section>

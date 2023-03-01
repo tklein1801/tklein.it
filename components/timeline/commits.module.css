@@ -1,16 +1,23 @@
 .container {
-  /* background-color: red; */
   width: 65%;
 }
 
 .grid {
   display: grid;
   gap: 2px;
-  grid-template-columns: /*2fr*/ repeat(53, 1fr);
-  /* grid-template-rows: repeat(7); */
+  grid-template-columns: 1fr repeat(53, 1fr);
 }
 
-.week {
+.weekLabel {
+  width: auto;
+  height: auto;
+  aspect-ratio: 2/1;
+  margin-bottom: 2px;
+  font-size: 11px;
+  text-align: right;
+}
+.weekLabel > small {
+  padding-right: 2px;
 }
 
 .day {
@@ -49,6 +56,10 @@
 @media only screen and (max-width: 600px) {
   .container {
     width: 100%;
+  }
+
+  .weekLabels {
+    display: none;
   }
 
   .day {

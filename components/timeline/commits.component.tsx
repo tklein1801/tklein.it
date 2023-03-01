@@ -1,5 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
+import { getWindowDimensions } from '../../utils';
 import styles from './commits.module.css';
 
 interface ContributionDay {
@@ -117,9 +118,10 @@ export const CommitsTimeline: React.FC<CommitTimelineProps> = ({ contributions }
       <div
         className={styles.grid}
         style={{
-          gridTemplateColumns: `repeat(${displayedWeeks.length}, 1fr)`,
+          gridTemplateColumns: `${mobileView ? '' : '2fr'} repeat(${displayedWeeks.length}, 1fr)`,
         }}
       >
+        <WeekLabels labels={['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat']} />
         {displayedWeeks.map((week, idx) => (
           <Week key={'week-' + idx} week={week} highestContribution={highestContribution} />
         ))}
@@ -128,29 +130,14 @@ export const CommitsTimeline: React.FC<CommitTimelineProps> = ({ contributions }
   );
 };
 
-export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-export type DeviceSize = 'small' | 'medium' | 'wide';
-
-export function getBreakpoint(width: number): Breakpoint {
-  if (width >= 1536) {
-    return 'xl';
-  } else if (width >= 1200) {
-    return 'lg';
-  } else if (width >= 900) {
-    return 'md';
-  } else if (width >= 600) {
-    return 'sm';
-  } else {
-    return 'xs';
-  }
-}
-
-export function getWindowDimensions(window: Window) {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height,
-    breakpoint: getBreakpoint(width),
-  };
-}
+export const WeekLabels: React.FC<{ labels: string[] }> = ({ labels }) => {
+  return (
+    <div className={styles.weekLabels}>
+      {labels.map((label) => (
+        <div key={label} className={styles.weekLabel}>
+          <small>{label}</small>
+        </div>
+      ))}
+    </div>
+  );
+};

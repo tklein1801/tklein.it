@@ -1,0 +1,29 @@
+.stock {
+  display: flex;
+  justify-content: center;
+  min-width: 10rem;
+  max-width: 10rem;
+}
+.stock > div {
+  display: flex;
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+}
+.stock > div:hover {
+  background-color: var(--surface);
+  border-color: var(--border);
+  border-radius: var(--borderRadius);
+}
+.change {
+  display: flex;
+  margin-left: 0.5rem;
+}
+.iconContainer {
+  margin-right: 0.25rem;
+}
+.positive {
+  color: var(--primary);
+}
+.negative {
+  color: var(--error);
+}

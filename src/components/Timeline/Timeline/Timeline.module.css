@@ -1,0 +1,145 @@
+/* Acutall (time)line */
+.timeline {
+  position: relative;
+  margin: 0 auto;
+}
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background-color: var(--primary);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+  border-radius: 8px;
+}
+
+/* Create an container for the content */
+.container {
+  position: relative;
+  box-sizing: border-box;
+  width: 50%;
+  padding: 0.5rem 41px;
+}
+
+/* Place the circles on the (time)line */
+.container::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  top: 24px;
+  height: 16px;
+  right: -8px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Container position for the containers */
+.left {
+  left: 0%;
+}
+.right {
+  left: 50%;
+}
+
+/* Add right-pointing arrows */
+.left::before {
+  content: ' ';
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 31px;
+  border: medium solid var(--primary);
+  border-width: 10px 0 10px 10px;
+  border-color: transparent var(--primary);
+}
+/* Add left-pointing arrows */
+.right::before {
+  content: ' ';
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 31px;
+  border: medium solid var(--primary);
+  border-width: 10px 10px 10px 0;
+  border-color: transparent var(--primary) transparent transparent;
+}
+
+/* Position the circle on the line for the right items */
+.right::after {
+  left: -8px;
+}
+
+.content {
+  transition: all 200ms;
+  position: relative;
+  padding: 0.75rem 1rem;
+  background-color: transparent;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+}
+.content:hover {
+  border-color: var(--primary);
+}
+.year {
+  font-size: 75%;
+  color: rgba(255, 255, 255, 0.6);
+}
+.content:hover .headline {
+  color: var(--primary);
+}
+.headline {
+  transition: all 200ms ease;
+  font-size: 90%;
+}
+.description {
+  font-size: 80%;
+}
+
+@media screen and (max-width: 1200px) {
+  /* Move (time)line to the left */
+  .timeline::after {
+    left: 10px;
+  }
+
+  .container {
+    width: 100%;
+    padding-left: 49px;
+    padding-right: 0px;
+  }
+
+  /* Make all arrows pointing to the left */
+  .container::before {
+    left: 39px;
+    border: medium solid var(--primary);
+    border-width: 10px 10px 10px 0;
+    border-color: transparent var(--primary) transparent transparent;
+  }
+
+  /* Move circles on the left line */
+  .left::after,
+  .right::after {
+    left: 2px;
+  }
+
+  /* Transform right container to left positioned containers */
+  .right {
+    left: 0%;
+  }
+
+  .year {
+    font-size: 85%;
+  }
+  .headline {
+    font-size: 100%;
+  }
+  .description {
+    font-size: 85%;
+  }
+}

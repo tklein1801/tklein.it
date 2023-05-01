@@ -1,0 +1,22 @@
+.header {
+  /* z-index: 1000;
+  position: sticky;
+  top: 0; */
+  margin-bottom: 0;
+  background-image: url('../../../public/header.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.header nav {
+  transition: padding 300ms;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 4em 0;
+}
+
+.header nav > a + a {
+  margin-left: 1.5rem;
+}

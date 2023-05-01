@@ -1,0 +1,44 @@
+.skillsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 200px));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skill {
+  transition: 200ms;
+  display: grid;
+  grid-template-columns: 1rem auto;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #bdbdbd;
+}
+.skill:hover,
+.skill:hover p,
+.skill:hover svg {
+  cursor: default;
+  color: var(--primary);
+}
+.skill > :first-child {
+  margin: 0 auto;
+}
+.skill p {
+  margin-left: 0.5rem;
+}
+.skill svg {
+  color: var(--primary);
+}
+
+@media (max-width: 786px) {
+  .skillsContainer {
+    grid-template-columns: 100%;
+  }
+}

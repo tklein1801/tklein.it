@@ -1,0 +1,33 @@
+.card {
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  transition: all 200ms !important;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 5px;
+}
+.card:hover {
+  border-color: var(--primary);
+}
+
+.card .title {
+  font-weight: normal;
+}
+
+.card .title a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+}
+.card:hover .title {
+  cursor: pointer;
+  color: var(--primary);
+}
+.card:hover .title > a {
+  color: var(--primary);
+}
+
+.card .text {
+  margin-top: 0.25rem;
+  font-size: 90%;
+}

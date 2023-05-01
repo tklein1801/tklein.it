@@ -1,0 +1,12 @@
+/* .footer {
+  background-color: red;
+} */
+
+.text {
+  text-align: center;
+  padding: 1rem;
+}
+
+.author {
+  color: var(--primary);
+}

@@ -17,7 +17,7 @@ export const Sidebar = () => {
         <h1 className={styles.name}>Thorben Klein</h1>
         <ul>
           {Links.map(({ label, ref }) => (
-            <SidebarLink key={label} href={ref} children={label} />
+            <SidebarLink key={label} href={ref} text={label} />
           ))}
         </ul>
       </nav>

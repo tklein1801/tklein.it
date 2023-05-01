@@ -1,13 +1,15 @@
 import React from 'react';
 import type { AnchorHTMLAttributes } from 'react';
-import { Link as PageLink } from '@/components/typography';
+import { Link as PageLink } from '@/components/Typography';
 
-export type SidebarLinkProps = Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'children'>;
+export type SidebarLinkProps = Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
+  text: string | React.ReactNode;
+};
 
-export const SidebarLink: React.FC<SidebarLinkProps> = ({ href, children }) => {
+export const SidebarLink: React.FC<SidebarLinkProps> = ({ href, text }) => {
   return (
     <li>
-      <PageLink href={href}>{children}</PageLink>
+      <PageLink href={href}>{text}</PageLink>
     </li>
   );
 };

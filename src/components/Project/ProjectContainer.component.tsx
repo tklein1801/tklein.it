@@ -3,7 +3,7 @@ import { Section } from '@/components/Section';
 import { Heading } from '@/components/Typography';
 import type { Project as ProjectType } from './Project.type';
 import { Project } from './Project.component';
-import style from './project.module.css';
+import style from './Project.module.css';
 
 export type ProjectContainerProps = {
   projects: ProjectType[];

@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './achievement.module.css';
+import style from './Achievement.module.css';
 
 export type AchievementProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
   title: string;

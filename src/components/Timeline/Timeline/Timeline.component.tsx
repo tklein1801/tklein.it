@@ -1,7 +1,7 @@
 import React from 'react';
 import { Section } from '@/components/Section';
 import { Heading } from '@/components/Typography';
-import style from './timeline.module.css';
+import style from './Timeline.module.css';
 
 export interface TimelineEvent {
   left: boolean;

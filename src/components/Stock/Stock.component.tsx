@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import style from './stock.module.css';
+import style from './Stock.module.css';
 
 export type StockProps = { symbol: string; change: number };
 

@@ -22,7 +22,7 @@ export const CommitHistory: React.FC<CommitTimelineProps> = ({ contributions }) 
   const displayedWeeks: ContributionWeek[] = React.useMemo(() => {
     const { weeks } = contributions.contributionCalendar;
     return mobileView ? weeks.slice(weeks.length / 2, weeks.length) : weeks;
-  }, [mobileView]);
+  }, [mobileView, contributions.contributionCalendar]);
 
   const handleWindowResize = () => {
     setMobileView(getWindowDimensions(window).breakpoint === 'xs');

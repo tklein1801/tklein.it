@@ -11,7 +11,7 @@
   width: 100%;
   height: 100%;
   padding: 0.8em;
-  background-color: var(--surface);
+  background-color: var(--sidebarBackground);
   border-radius: 5px;
   overflow: hidden;
 }

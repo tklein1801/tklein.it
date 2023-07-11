@@ -8,11 +8,14 @@ config.autoAddCss = false;
 import React from 'react';
 import type { AppProps } from 'next/app';
 import { Analytics } from '@vercel/analytics/react';
+import { Layout } from '@/components/Layout.component';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <React.Fragment>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
       <Analytics />
     </React.Fragment>
   );

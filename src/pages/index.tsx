@@ -1,5 +1,5 @@
 import React from 'react';
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { type GetServerSideProps, type InferGetServerSidePropsType } from 'next';
 import Image from 'next/image';
 import {
   StockService,

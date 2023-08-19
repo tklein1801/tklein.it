@@ -7,7 +7,7 @@ import { Footer } from './Footer';
 
 export const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <React.Fragment>
+    <html>
       <Head />
       <body>
         <div className={style.wrapper}>
@@ -19,6 +19,6 @@ export const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
           </div>
         </div>
       </body>
-    </React.Fragment>
+    </html>
   );
 };

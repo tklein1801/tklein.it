@@ -14,10 +14,20 @@ export const StockWrapper: React.FC<StockWrapperProps> = ({ stocks, ...props }) 
       <div className={style.stockContainer}>
         <div>
           {stocks.map((stock) => (
-            <Stock key={stock.symbol} symbol={stock.symbol} change={stock.quote['EUR'].percent_change_24h} />
+            <Stock
+              key={stock.symbol}
+              slug={stock.slug}
+              symbol={stock.symbol}
+              change={stock.quote['EUR'].percent_change_24h}
+            />
           ))}
           {stocks.map((stock) => (
-            <Stock key={stock.symbol} symbol={stock.symbol} change={stock.quote['EUR'].percent_change_24h} />
+            <Stock
+              key={stock.symbol}
+              slug={stock.slug}
+              symbol={stock.symbol}
+              change={stock.quote['EUR'].percent_change_24h}
+            />
           ))}
         </div>
       </div>

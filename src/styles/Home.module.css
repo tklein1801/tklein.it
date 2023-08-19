@@ -60,6 +60,7 @@ section.ticker {
 
   .row > .profileInformation,
   .row > .profilePictureContainer {
+    margin-top: 2rem;
     width: 100%;
   }
 }

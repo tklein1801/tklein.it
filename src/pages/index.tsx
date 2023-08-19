@@ -19,7 +19,7 @@ import {
   Achievement,
 } from '@/components';
 import style from '@/styles/Home.module.css';
-import MeJpg from '@public//me.jpeg';
+import MeJpg from '@public/me.jpeg';
 
 export type HomeProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
@@ -41,13 +41,6 @@ export default function Home({ stocks, achievements, projects, commits }: HomePr
               <br />
               Let's dive into the world of software development together and create something amazing!
             </p>
-
-            {/* <p>
-                  Hi! I'm just a little apprentice @ <Link href="https://tchibo-karriere.de">Tchibo GmbH</Link> who's on
-                  his way to becoming an software developer, dealing with programming and other things (currently I'm
-                  taking a look into the <Link href="https://sap.com">SAP</Link> development environment). On this
-                  website you can have a look at projects & other stuff I've made in the past...
-                </p> */}
 
             <SkillContainer />
 

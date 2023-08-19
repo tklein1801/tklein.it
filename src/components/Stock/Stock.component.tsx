@@ -3,13 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import style from './Stock.module.css';
 
-export type StockProps = { symbol: string; change: number };
+export type StockProps = { symbol: string; slug: string; change: number };
 
-export const Stock: React.FC<StockProps> = ({ symbol, change }) => {
+export const Stock: React.FC<StockProps> = ({ symbol, slug, change }) => {
   return (
     <div className={style.stock}>
       <div>
-        <p>{symbol}</p>
+        <a href={'https://www.coinbase.com/de/price/' + slug} target="_blank" rel="noreferrer">
+          {symbol}
+        </a>
         <p className={`${style.change} ${change > 0 ? style.positive : style.negative}`}>
           <span className={style.iconContainer}>
             {change > 0 ? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />}

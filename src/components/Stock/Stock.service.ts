@@ -16,7 +16,7 @@ export class StockService {
         }
       );
       const json = (await response.json()) as StockApiResponse;
-      if (response.status >= 200 && response.status <= 299) {
+      if (response.status < 200 && response.status >= 300) {
         throw new Error(JSON.stringify(json));
       }
 

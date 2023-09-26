@@ -30,12 +30,11 @@ export const getServerSideProps: GetServerSideProps<{
   const slug = params ? (Array.isArray(params.slug) ? params.slug[0] : params.slug) : null;
   let shortUrl = null;
   try {
-    const response: ApiResponse<ShortUrl> = await fetch(
-      `https://kleithor-spring-boot-backend.herokuapp.com/v2/short_url?sid=${slug}`
-    ).then((response) => response.json());
-    console.log(response);
-    if (response.data) {
-      shortUrl = response.data;
+    const response = await fetch(`https://backend.tklein.it/v2/short_url?sid=${slug}`);
+    const json: ApiResponse<ShortUrl> = await response.json();
+    console.log(json);
+    if (json.data) {
+      shortUrl = json.data;
     }
   } catch (error) {
     console.error(error);

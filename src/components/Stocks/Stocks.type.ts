@@ -8,10 +8,10 @@ export type StockApiResponse = {
     notice: string | null;
     total_count: number;
   };
-  data: Stock[];
+  data: TStock[];
 };
 
-export type Stock = {
+export type TStock = {
   id: number;
   name: string;
   symbol: string;
@@ -28,10 +28,10 @@ export type Stock = {
   self_reported_market_cap: null;
   tvl_ratio: number;
   last_updated: string | Date;
-  quote: Record<string, Quote>;
+  quote: Record<string, TQuote>;
 };
 
-export type Quote = {
+export type TQuote = {
   price: number;
   volume_24h: number;
   volume_change_24h: number;

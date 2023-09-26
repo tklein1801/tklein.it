@@ -1,5 +1,5 @@
 {
-  "name": "tklein.it.rework",
+  "name": "tklein.it",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,16 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.4.0",
-    "@fortawesome/free-brands-svg-icons": "^6.4.0",
-    "@fortawesome/free-solid-svg-icons": "^6.4.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@vercel/analytics": "^1.0.0",
-    "date-fns": "^2.29.3",
-    "next": "13.3.0",
-    "node-sass": "^7.0.3",
+    "@types/node": "20.7.0",
+    "@types/react": "18.2.23",
+    "@types/react-dom": "18.2.7",
+    "date-fns": "^2.30.0",
+    "eslint": "8.50.0",
+    "eslint-config-next": "13.5.3",
+    "lucide-react": "^0.279.0",
+    "next": "13.5.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+<<<<<<< HEAD
     "sharp": "^0.32.5"
   },
   "devDependencies": {
@@ -28,5 +29,8 @@
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0",
     "typescript": "5.0.4"
+=======
+    "typescript": "5.2.2"
+>>>>>>> 171cc86 (refactor: Rewrite for NextJS 13)
   }
 }

@@ -1,10 +1,11 @@
 import React from 'react';
-import { StarIcon, GitForkIcon } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCodeFork, faStar } from '@fortawesome/free-solid-svg-icons';
+import { Card } from '@/components/Card';
 import type { Project as ProjectType } from './Project.type';
 import style from './Project.module.css';
-import { Card } from '../core';
 
-export const Project: React.FC<ProjectType & { showImage?: boolean }> = ({
+export const Project: React.FC<ProjectType> = ({
   owner,
   url,
   description,
@@ -15,6 +16,7 @@ export const Project: React.FC<ProjectType & { showImage?: boolean }> = ({
 }) => {
   return (
     <Card>
+      {/* <img className={style.projectImage} src={openGraphImageUrl} alt="Project Image" /> */}
       <Card.Title>
         <a href={`https://github.com/${owner.login}`} className="repo-link">
           @{owner.login}
@@ -41,14 +43,14 @@ export const Project: React.FC<ProjectType & { showImage?: boolean }> = ({
           </span>
         </div>
         <div>
-          <p style={{ display: 'flex', alignContent: 'center' }}>
-            <StarIcon />
+          <p>
+            <FontAwesomeIcon icon={faStar} />
             <span className={style.label}>{stargazerCount}</span>
           </p>
         </div>
         <div>
-          <p style={{ display: 'flex', alignContent: 'center' }}>
-            <GitForkIcon />
+          <p>
+            <FontAwesomeIcon icon={faCodeFork} />
             <span className={style.label}>{forkCount}</span>
           </p>
         </div>

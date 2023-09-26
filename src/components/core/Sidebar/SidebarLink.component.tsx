@@ -1,6 +1,6 @@
 import React from 'react';
 import type { AnchorHTMLAttributes } from 'react';
-import { Link as PageLink } from '@/components/Typography';
+import { Link } from '../Typography';
 
 export type SidebarLinkProps = Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
   text: string | React.ReactNode;
@@ -9,7 +9,7 @@ export type SidebarLinkProps = Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'hr
 export const SidebarLink: React.FC<SidebarLinkProps> = ({ href, text }) => {
   return (
     <li>
-      <PageLink href={href}>{text}</PageLink>
+      <Link href={href}>{text}</Link>
     </li>
   );
 };

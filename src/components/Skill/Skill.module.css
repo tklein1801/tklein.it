@@ -20,6 +20,7 @@
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
   color: #bdbdbd;
+  text-wrap: nowrap;
 }
 .skill:hover,
 .skill:hover p,

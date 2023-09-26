@@ -3,7 +3,7 @@
   position: sticky;
   top: 0; */
   margin-bottom: 0;
-  background-image: url('../../../public/header.jpg');
+  background-image: url('../../../../public/header.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

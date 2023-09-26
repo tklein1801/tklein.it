@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from '@/components/Typography';
+import { Link } from '../Typography';
 import style from './PageHeader.module.css';
 
-const Links = [
+const PageHeaderLinks = [
   { label: 'About me', ref: '#about-me' },
   { label: 'Commits', ref: '#commits' },
   { label: 'Experience', ref: '#my-experience' },
@@ -31,7 +31,7 @@ export const PageHeader = () => {
       //   paddingBottom: `${padding}em`,
       // }}
       >
-        {Links.map(({ label, ref }) => (
+        {PageHeaderLinks.map(({ label, ref }) => (
           <Link key={label} href={ref}>
             {label}
           </Link>

@@ -1,97 +1,83 @@
 export * from './Skill.component';
-export * from './SkillContainer.component';
+export * from './SkillWrapper.component';
 
 import type { Skill } from './Skill.component';
-import { faQuestion, faCross } from '@fortawesome/free-solid-svg-icons';
-import {
-  faSquareJs,
-  faPhp,
-  faHtml5,
-  faCss3,
-  faSass,
-  faJava,
-  faDocker,
-  faReact,
-  faDiscord,
-  faBootstrap,
-  faGoogle,
-  faNode,
-} from '@fortawesome/free-brands-svg-icons';
+import { ContainerIcon, HelpCircleIcon } from 'lucide-react';
 
 export const SKILLS: Skill[] = [
   {
-    icon: faQuestion,
+    icon: HelpCircleIcon,
     label: 'TypeScript',
   },
   {
-    icon: faSquareJs,
+    icon: HelpCircleIcon,
     label: 'JavaScript',
   },
   {
-    icon: faPhp,
+    icon: HelpCircleIcon,
     label: 'PHP',
   },
   {
-    icon: faHtml5,
+    icon: HelpCircleIcon,
     label: 'HTML',
   },
   {
-    icon: faCss3,
+    icon: HelpCircleIcon,
     label: 'CSS',
   },
   {
-    icon: faSass,
+    icon: HelpCircleIcon,
     label: 'SASS',
   },
   {
-    icon: faQuestion,
+    icon: HelpCircleIcon,
     label: 'SQL',
   },
   {
-    icon: faJava,
+    icon: HelpCircleIcon,
     label: 'Java',
   },
   {
-    icon: faDocker,
+    icon: ContainerIcon,
     label: 'Docker',
   },
 ];
 
 export const FRAMEWORKS: Skill[] = [
   {
-    icon: faReact,
+    icon: HelpCircleIcon,
     label: 'ReactJS',
   },
   {
-    icon: faReact,
+    icon: HelpCircleIcon,
     label: 'React Native',
   },
   {
-    icon: faNode,
+    icon: HelpCircleIcon,
     label: 'NodeJS',
   },
   {
-    icon: faDiscord,
+    icon: HelpCircleIcon,
     label: 'DiscordJS',
   },
   {
-    icon: faBootstrap,
+    icon: HelpCircleIcon,
     label: 'Bootstrap 4',
   },
   {
-    icon: faGoogle,
+    icon: HelpCircleIcon,
     label: 'Firebase',
   },
   {
-    icon: faQuestion,
+    icon: HelpCircleIcon,
     label: 'Supabase',
   },
   {
-    icon: faQuestion,
+    icon: HelpCircleIcon,
     label: 'Material UI',
   },
   {
-    icon: faCross,
+    icon: HelpCircleIcon,
     label: 'jQuery',
   },
 ];

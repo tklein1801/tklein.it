@@ -1,9 +1,9 @@
-import { Subheading } from '@/components/Typography/Heading';
 import { Skill } from './Skill.component';
 import { FRAMEWORKS, SKILLS } from '.';
 import style from './Skill.module.css';
+import { Subheading } from '../core';
 
-export const SkillContainer = () => {
+export const SkillWrapper = () => {
   return (
     <div className={style.skillsContainer}>
       <div>

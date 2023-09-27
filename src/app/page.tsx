@@ -17,7 +17,6 @@ import {
 
 const Loading: React.FC<{ service: string }> = ({ service }) => {
   return null;
-  return <p>Loading {service}</p>;
 };
 
 export default function Home() {

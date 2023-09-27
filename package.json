@@ -12,6 +12,7 @@
     "@types/node": "20.7.0",
     "@types/react": "18.2.23",
     "@types/react-dom": "18.2.7",
+    "@vercel/analytics": "^1.0.2",
     "date-fns": "^2.30.0",
     "eslint": "8.50.0",
     "eslint-config-next": "13.5.3",
@@ -19,18 +20,6 @@
     "next": "13.5.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-<<<<<<< HEAD
-    "sharp": "^0.32.5"
-  },
-  "devDependencies": {
-    "@types/node": "18.15.11",
-    "@types/react": "18.0.33",
-    "@types/react-dom": "18.0.11",
-    "eslint": "8.26.0",
-    "eslint-config-next": "13.0.0",
-    "typescript": "5.0.4"
-=======
     "typescript": "5.2.2"
->>>>>>> 171cc86 (refactor: Rewrite for NextJS 13)
   }
 }

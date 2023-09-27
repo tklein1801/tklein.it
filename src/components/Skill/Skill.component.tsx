@@ -2,7 +2,6 @@ import React from 'react';
 import style from './Skill.module.css';
 
 export type Skill = {
-  icon: React.Component;
   label: string;
 };
 

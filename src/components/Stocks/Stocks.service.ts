@@ -1,7 +1,7 @@
-import type { Stock, StockApiResponse } from './Stocks.type';
+import type { TStock, StockApiResponse } from './Stocks.type';
 
 export class StocksService {
-  static async fetchCrypo(): Promise<Stock[]> {
+  static async fetchCrypo(): Promise<TStock[]> {
     const apiKey = process.env.COINMARKETCAP;
     if (!apiKey) throw new Error("Environment-variable 'COINMARKETCAP' not set");
 

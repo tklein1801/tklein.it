@@ -1,5 +1,6 @@
 import '@/style/globals.css';
 import Head from 'next/head';
+import { Analytics } from '@vercel/analytics/react';
 import { DefaultLayout } from '@/components';
 // import { JetBrains_Mono } from 'next/font/google';
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </Head>
       <body /*className={jbMono.className}*/>
         <DefaultLayout>{children}</DefaultLayout>
+        <Analytics />
       </body>
     </html>
   );

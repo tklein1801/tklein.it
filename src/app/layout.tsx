@@ -1,5 +1,6 @@
 import '@/style/globals.css';
 import Head from 'next/head';
+import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { DefaultLayout } from '@/components';
@@ -28,6 +29,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <DefaultLayout>{children}</DefaultLayout>
         <Analytics />
         <SpeedInsights />
+        {process.env.NODE_ENV === 'production' && (
+          <Script
+            async
+            src="https://analytics.tools.tklein.it/script.js"
+            data-website-id="faab5301-fe86-4362-8bb5-e51313e9b0f0"
+          />
+        )}
       </body>
     </html>
   );

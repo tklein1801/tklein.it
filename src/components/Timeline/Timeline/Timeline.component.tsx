@@ -1,57 +1,33 @@
 import React from 'react';
-import style from './Timeline.module.css';
-import { Heading, Section } from '@/components/core';
+import {Box} from '@mui/material';
+import {TimelineEvent} from './TimelineEvent.component';
+import type {TTimelineEvent} from './types';
 
-export interface TimelineEvent {
-  left: boolean;
-  year: string;
-  headline: string;
-  description: string;
-}
-
-const EVENTS: TimelineEvent[] = [
-  {
-    year: 'Aug. 2021 - Today',
-    headline: 'Computer Science Expert Software Development',
-    description:
-      'On August 1, 2021, I started my 3-year apprenticeship as Computer Science Expert for Software Development at Tchibo GmbH.',
-  },
-  {
-    year: 'Jun. 2019 - Jun. 2021',
-    headline: 'Commercial Assistant Information Processing (KAI)',
-    description:
-      'Started my two-year school-based training as a Commerical Assistant Information Processing (Kaufmännischer Assistent Schwerpunkt Informationsverarbeitung)',
-  },
-  {
-    year: '2019',
-    headline: 'MSA KGS Schneverdingen',
-    description: 'In July 2019 I successfully graduated from school at KGS Schneverdingen (MSA)',
-  },
-].map((event, index) => ({ ...event, left: index % 2 === 0 }));
-
-export const Event: React.FC<TimelineEvent> = ({ left, year, headline, description }) => {
-  return (
-    <div className={`${style.container} ${left ? style.left : style.right}`}>
-      <div className={style.content}>
-        <p className={style.year}>{year}</p>
-        <p className={style.headline}>{headline}</p>
-        <p className={style.description}>{description}</p>
-      </div>
-    </div>
-  );
+export type TTimelineProps = {
+  events: TTimelineEvent[];
 };
 
-export type TimelineContainerProps = Pick<React.HTMLAttributes<HTMLDivElement>, 'id'>;
-
-export const TimelineContainer: React.FC<TimelineContainerProps> = (props) => {
+export const Timeline: React.FC<TTimelineProps> = ({events}) => {
   return (
-    <Section {...props}>
-      <Heading>My experience</Heading>
-      <div className={style.timeline}>
-        {EVENTS.map((event) => (
-          <Event key={event.year} {...event} />
-        ))}
-      </div>
-    </Section>
+    <Box
+      sx={{
+        position: 'relative',
+        margin: '0 auto',
+        ':after': {
+          content: "''",
+          position: 'absolute',
+          width: '4px',
+          backgroundColor: 'primary.main',
+          top: 0,
+          bottom: 0,
+          left: {xs: '10px', md: '50%'},
+          marginLeft: '-2px',
+          borderRadius: '8px',
+        },
+      }}>
+      {events.map(event => (
+        <TimelineEvent key={event.year} {...event} />
+      ))}
+    </Box>
   );
 };

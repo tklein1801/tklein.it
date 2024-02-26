@@ -1,3 +1,3 @@
-export * from './CommitHistory.type';
+export * from './types';
 export * from './CommitHistory.service';
-export * from './CommitHistory.component';
+export * from './CommitHistoryWrapper.component';

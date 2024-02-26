@@ -1,9 +1,9 @@
-import type { ContributionCalendar } from './CommitHistory.type';
+import type {TContributionCalendar} from './types';
 
 export class CommitHistoryService {
-  static async getCommits(): Promise<ContributionCalendar> {
-    const apiKey = process.env.GITHUB_PERSONAL_ACCESS_TOKEN;
-    if (!apiKey) throw new Error("Environment-variable 'GITHUB_PERSONAL_ACCESS_TOKEN' not set");
+  static async getCommits(): Promise<TContributionCalendar> {
+    const apiKey = process.env.GH_PAT;
+    if (!apiKey) throw new Error("Environment-variable 'GH_PAT' not set");
 
     return fetch('https://api.github.com/graphql', {
       method: 'POST',
@@ -15,15 +15,8 @@ export class CommitHistoryService {
       },
       body: '{"query":"{\\n  viewer {\\n    login\\n    contributionsCollection {\\n      contributionCalendar {\\n        totalContributions\\n        weeks {\\n          contributionDays {\\n            contributionCount\\n            weekday\\n            date\\n          }\\n        }\\n      }\\n    }\\n  }\\n}","variables":{}}',
     })
-      .then((response) => response.json())
-      .then((json) => json.data.viewer.contributionsCollection)
-      .catch((error) => console.error(error));
-  }
-
-  static determineBackgroundColor(
-    commits: number,
-    highestContribution: number
-  ): React.CSSProperties['backgroundColor'] {
-    return `rgb(2, 212, 99, ${((commits * 100) / highestContribution / 100).toFixed(2)})`;
+      .then(response => response.json())
+      .then(json => json.data.viewer.contributionsCollection)
+      .catch(error => console.error(error));
   }
 }

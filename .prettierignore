@@ -1,7 +1,0 @@
-node_modules/
-public/
-*/fonts/
-.eslintcache
-.github/
-.prettierrc.json
-.jest/

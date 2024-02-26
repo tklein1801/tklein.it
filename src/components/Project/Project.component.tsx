@@ -1,58 +1,110 @@
-import React from 'react';
-import { StarIcon, GitForkIcon } from 'lucide-react';
-import type { Project as ProjectType } from './Project.type';
-import style from './Project.module.css';
-import { Card } from '../core';
+'use client';
 
-export const Project: React.FC<ProjectType & { showImage?: boolean }> = ({
-  owner,
-  url,
-  description,
-  name,
-  primaryLanguage,
-  stargazerCount,
-  forkCount,
+import React from 'react';
+import {Box, Grid, Paper, Typography, Link} from '@mui/material';
+import {StarRounded, RestaurantRounded} from '@mui/icons-material';
+import {Badge} from '@components/Base';
+
+export type TProjectProps = {
+  repositoryUrl: string;
+  repositoryName: string;
+  repositoryDescription: string;
+  repositoryLanguage: string;
+  repositoryLanguageColor: string;
+  repositoryStars: number;
+  repositoryForks: number;
+};
+
+export const Project: React.FC<TProjectProps> = ({
+  repositoryUrl,
+  repositoryName,
+  repositoryDescription,
+  repositoryLanguage,
+  repositoryLanguageColor,
+  repositoryStars,
+  repositoryForks,
 }) => {
   return (
-    <Card>
-      <Card.Title>
-        <a href={`https://github.com/${owner.login}`} className="repo-link">
-          @{owner.login}
-        </a>
-        /
-        <a href={url} className="repo-link">
-          {name}
-        </a>
-      </Card.Title>
-      <Card.Text>{description || 'No description'}</Card.Text>
+    <Paper
+      elevation={0}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '100%',
+        transition: 'borderColor .2s',
+        border: theme => `2px solid ${theme.palette.divider}`,
+        p: 2,
+        ':hover': {
+          borderColor: 'primary.main',
+        },
+        ':hover > a': {
+          color: 'primary.main',
+        },
+      }}>
+      <Link
+        variant="subtitle1"
+        sx={{
+          transition: 'color .2s',
+          mb: 1,
+          fontWeight: '500',
+          color: 'text.primary',
+          textDecoration: 'none',
+        }}
+        href={repositoryUrl}
+        target="_blank"
+        data-umami-event="click-project-link"
+        data-umami-event-project={repositoryName}
+        data-umami-event-href={repositoryUrl}>
+        {repositoryName}
+      </Link>
 
-      <div className={style.projectInfoContainer}>
-        <div>
-          <span
-            style={{
-              borderRadius: '5px',
-              padding: '.2rem .5rem',
-              fontSize: '.8rem',
-              backgroundColor: primaryLanguage.color,
-              color: primaryLanguage.color === '#f1e05a' ? 'black' : 'white',
-            }}
-          >
-            {primaryLanguage.name}
-          </span>
-        </div>
-        <div>
-          <p style={{ display: 'flex', alignContent: 'center' }}>
-            <StarIcon />
-            <span className={style.label}>{stargazerCount}</span>
-          </p>
-        </div>
-        <div>
-          <p style={{ display: 'flex', alignContent: 'center' }}>
-            <GitForkIcon />
-            <span className={style.label}>{forkCount}</span>
-          </p>
-        </div>
-      </div>
-    </Card>
+      <Typography
+        sx={{
+          display: '-webkit-box',
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          WebkitLineClamp: 2,
+        }}>
+        {repositoryDescription ?? 'No description'}
+      </Typography>
+
+      <Grid container columnSpacing={2} sx={{mt: 1}}>
+        <Grid item xs={6} md={5}>
+          <Badge>
+            <Typography variant="body2" fontWeight={600}>
+              {repositoryLanguage}
+            </Typography>
+          </Badge>
+        </Grid>
+        {[
+          {
+            icon: <StarRounded />,
+            value: repositoryStars,
+          },
+          {
+            icon: <RestaurantRounded />,
+            value: repositoryForks,
+          },
+        ].map(({value, icon}, index) => (
+          <Grid key={index} item xs={3} md={3.5}>
+            <Box sx={{display: 'flex', height: '100%', alignItems: 'center'}}>
+              <Typography variant="body2" sx={{display: 'flex', alignItems: 'center', fontSize: '105%'}}>
+                {React.isValidElement(icon) &&
+                  React.cloneElement(icon, {
+                    // @ts-ignore
+                    sx: {
+                      fontSize: 'inherit',
+                      mr: 0.5,
+                    },
+                  })}{' '}
+                {value}
+              </Typography>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+    </Paper>
   );
 };

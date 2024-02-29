@@ -4,14 +4,14 @@
   }
 
   100% {
-    transform: translate3d(-240rem, 0, 0);
+    transform: translate3d(-200rem, 0, 0);
   }
 }
 
 .stockContainer {
   display: flex;
   flex-direction: row;
-  animation: verticalScroll 40s linear infinite;
+  animation: verticalScroll 30s linear infinite;
 }
 
 @media (max-width: 1200px) {

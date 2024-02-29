@@ -38,4 +38,5 @@ export const config = {
       },
     ].map((event, index) => ({...event, left: index % 2 === 0})),
   },
+  sidebarWidth: '360px',
 };

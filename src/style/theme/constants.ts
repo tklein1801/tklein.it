@@ -12,8 +12,9 @@ import {
 import {MixinsOptions} from '@mui/material/styles/createMixins';
 import {TypographyOptions} from '@mui/material/styles/createTypography';
 import {fontFamily} from './font';
+import {config} from '@/config';
 
-export const SidebarWidth: string = 360 + 'px';
+export const SidebarWidth: string = config.sidebarWidth;
 
 export const Breakpoints: BreakpointsOptions = {
   keys: ['xs', 'sm', 'md', 'lg', 'xl'],

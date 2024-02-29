@@ -8,7 +8,7 @@ export const Header = () => {
     <Box
       sx={{
         py: 8,
-        backgroundImage: 'url(https://tklein.it/_next/static/media/header.af1ae203.jpg)',
+        backgroundImage: 'url(/header.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: '50%',
         backgroundRepeat: 'no-repeat',

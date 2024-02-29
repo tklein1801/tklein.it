@@ -4,7 +4,7 @@ export type TNameProps = TypographyProps;
 
 export const Name: React.FC<TNameProps> = ({...props}) => {
   return (
-    <Typography variant="h3" fontWeight="bold" {...props}>
+    <Typography variant="h2" fontWeight="bold" {...props}>
       Thorben Klein
     </Typography>
   );

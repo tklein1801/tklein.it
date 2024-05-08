@@ -25,8 +25,7 @@ export const Project: React.FC<TProjectProps> = ({
   repositoryForks,
 }) => {
   return (
-    <Paper
-      elevation={0}
+    <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -34,9 +33,11 @@ export const Project: React.FC<TProjectProps> = ({
         height: '100%',
         transition: 'borderColor .2s',
         border: theme => `2px solid ${theme.palette.divider}`,
+        borderRadius: theme => `${theme.shape.borderRadius}px`,
         p: 2,
         ':hover': {
           borderColor: 'primary.main',
+          backgroundColor: 'background.paper',
         },
         ':hover > a': {
           color: 'primary.main',
@@ -105,6 +106,6 @@ export const Project: React.FC<TProjectProps> = ({
           </Grid>
         ))}
       </Grid>
-    </Paper>
+    </Box>
   );
 };

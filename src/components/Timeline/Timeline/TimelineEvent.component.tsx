@@ -72,9 +72,11 @@ export const TimelineEvent: React.FC<TTimelineEventProps> = ({left, year, headli
           transition: 'all .2s',
           position: 'relative',
           padding: '.75rem 1rem',
-          backgroundColor: 'background.paper',
           border: theme => `2px solid ${theme.palette.primary.main}`,
           borderRadius: theme => theme.shape.borderRadius + 'px',
+          ':hover': {
+            backgroundColor: 'background.paper',
+          },
           ':hover > .event-headline': {
             color: 'primary.main',
           },

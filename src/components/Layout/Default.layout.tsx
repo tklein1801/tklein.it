@@ -3,8 +3,8 @@ import {Box, Container} from '@mui/material';
 import {Sidebar} from './Sidebar.component';
 import {Header} from './Header.component';
 import {Footer} from './Footer.component';
-import {SuspendedStockWrapper} from '@components/Stock';
 import {config} from '@/config';
+import {SuspendedStockWrapper} from '@components/Stock';
 
 export type TDefaultLayoutProps = React.PropsWithChildren;
 

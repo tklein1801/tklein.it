@@ -20,7 +20,12 @@ export const config = {
   experience: {
     events: [
       {
-        year: 'Aug. 2021 - Today',
+        year: 'Jun 2024 - Today',
+        headline: 'Junior Specialist SAP Developer',
+        description: "I'm working as a Junior Specialist SAP Developer at Tchibo GmbH.",
+      },
+      {
+        year: 'Aug. 2021 - Jun. 2024',
         headline: 'Computer Science Expert Software Development',
         description:
           'On August 1, 2021, I started my 3-year apprenticeship as Computer Science Expert for Software Development at Tchibo GmbH.',

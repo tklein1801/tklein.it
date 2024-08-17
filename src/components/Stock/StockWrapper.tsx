@@ -9,6 +9,7 @@ import {withSuspense} from '@/hooks';
 export const StockWrapper: React.FC = async () => {
   const data = await StocksService.fetchCrypo();
 
+  if (!data.length) return null;
   return (
     <React.Fragment>
       <TickerWrapper>

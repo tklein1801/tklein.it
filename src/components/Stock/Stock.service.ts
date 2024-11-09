@@ -17,9 +17,10 @@ export class StocksService {
       const json = (await response.json()) as TStockApiResponse;
       if (response.status !== 200) {
         console.error(json);
+        return [];
       }
 
-      return [];
+      return json.data;
     } catch (error) {
       console.error(error);
       return [];

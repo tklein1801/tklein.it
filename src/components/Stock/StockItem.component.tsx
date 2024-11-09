@@ -24,7 +24,9 @@ export const StockItem: React.FC<TStock> = ({symbol, slug, quote}) => {
         }}>
         <Typography>{symbol}</Typography>{' '}
         {isPositive ? <ArrowDropUpRounded color="success" /> : <ArrowDropDownRounded color="error" />}{' '}
-        <Typography sx={{color: isPositive ? 'success.main' : 'error.main'}}>{change24h.toFixed(3)}%</Typography>
+        <Typography sx={{color: isPositive ? 'success.main' : 'error.main'}}>
+          {Math.abs(change24h).toFixed(3)}%
+        </Typography>
       </Stack>
     </Box>
   );

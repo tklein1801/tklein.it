@@ -25,7 +25,6 @@ export default function RootLayout({
         <meta name="theme-color" content="#02d463" />
         <meta property="og:image" content="/me.jpeg" />
         <meta property="og:type" content="website" />
-        <meta name="cf-2fa-verify" content="23a53f087437ecb" />
         <link rel="icon" type="image/jpg" sizes="500x500" href="/me.jpeg" />
       </Head>
       <body className={fontClassName}>

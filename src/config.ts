@@ -2,25 +2,33 @@ export const config = {
   name: 'Thorben Klein',
   username: 'tklein1801',
   workedWith: {
-    languages: ['TypeScript', 'JavaScript', 'PHP', 'ABAP', 'SQL', 'Java', 'Go', 'HTML & CSS', '(looking into) Rust'],
+    languages: ['TypeScript', 'JavaScript', 'PHP', 'ABAP', 'SQL', 'Java', 'Go', 'HTML & CSS'],
     technologies: [
       'ReactJS',
       'React Native',
       'Electron',
       'ExpressJS',
-      'Hyper-Express',
       'NextJS',
       'Docker',
       'NodeJS',
-      'Firebase',
       'Supabase',
       'Material UI',
+      'SAP Capire',
+      'RAP',
+      'EDA',
+      'Concourse CI/CD',
+      'Spring Boot'
     ],
   },
   experience: {
     events: [
       {
-        year: 'Jun 2024 - Today',
+        year: 'Jan 2026 - Today',
+        headline: 'Specialist SAP Developer',
+        description: "Promoted! I'm working as a Specialist SAP Developer at Tchibo GmbH.",
+      },
+      {
+        year: 'Jun 2024 - Jan 2026',
         headline: 'Junior Specialist SAP Developer',
         description: "I'm working as a Junior Specialist SAP Developer at Tchibo GmbH.",
       },

@@ -17,7 +17,7 @@ export const config = {
       'RAP',
       'EDA',
       'Concourse CI/CD',
-      'Spring Boot'
+      'Spring Boot',
     ],
   },
   experience: {

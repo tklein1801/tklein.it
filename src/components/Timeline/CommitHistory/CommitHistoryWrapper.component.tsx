@@ -8,32 +8,32 @@ export type TCommitHistoryWrapper = {
 };
 
 export const CommitHistoryWrapper: React.FC<TCommitHistoryWrapper> = async ({gridProps}) => {
-  const {
-    contributionCalendar: {totalContributions, weeks},
-  } = await CommitHistoryService.getCommits();
+  try {
+    const data = await CommitHistoryService.getCommits();
+    if (!data) return null;
+    const {
+      contributionCalendar: {totalContributions, weeks},
+    } = data;
 
-  return (
-    <Grid container columns={weeks.length} spacing={0.2} direction={'row'} {...gridProps} sx={{...gridProps?.sx}}>
-      {/* {weeks.flatMap(() => (
-        <Grid item xs={1}>
-          <Box sx={{aspectRatio: '1/1', height: 'auto', width: '100%', border: '1px solid black'}}>{}</Box>
-        </Grid>
-      ))} */}
-
-      {weeks.map((week, index) => {
-        return week.contributionDays.map((day, index) => {
-          return (
-            <Grid item xs={1} key={index}>
-              <CommitBox
-                key={day.date}
-                day={new Date(day.date)}
-                commits={day.contributionCount}
-                highestContribution={totalContributions}
-              />
-            </Grid>
-          );
-        });
-      })}
-    </Grid>
-  );
+    return (
+      <Grid container columns={weeks.length} spacing={0.2} direction={'row'} {...gridProps} sx={{...gridProps?.sx}}>
+        {weeks.map((week, index) => {
+          return week.contributionDays.map((day, index) => {
+            return (
+              <Grid item xs={1} key={index}>
+                <CommitBox
+                  key={day.date}
+                  day={new Date(day.date)}
+                  commits={day.contributionCount}
+                  highestContribution={totalContributions}
+                />
+              </Grid>
+            );
+          });
+        })}
+      </Grid>
+    );
+  } catch {
+    return null;
+  }
 };

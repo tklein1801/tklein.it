@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import {StyledPaper} from '@components/Base';
 import {HomeRounded} from '@mui/icons-material';
 import {Button, Typography} from '@mui/material';

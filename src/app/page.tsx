@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import {Box, Grid, Typography} from '@mui/material';
 import {Heading, Link} from '@components/Base';
 import {Picture} from '@components/Me';

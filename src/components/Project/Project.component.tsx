@@ -53,10 +53,7 @@ export const Project: React.FC<TProjectProps> = ({
           textDecoration: 'none',
         }}
         href={repositoryUrl}
-        target="_blank"
-        data-umami-event="click-project-link"
-        data-umami-event-project={repositoryName}
-        data-umami-event-href={repositoryUrl}>
+        target="_blank">
         {repositoryName}
       </Link>
 
@@ -72,7 +69,7 @@ export const Project: React.FC<TProjectProps> = ({
       </Typography>
 
       <Grid container columnSpacing={2} sx={{mt: 1}}>
-        <Grid item xs={6} md={5}>
+        <Grid size={{xs: 6, md: 5}}>
           <Badge>
             <Typography variant="body2" fontWeight={600}>
               {repositoryLanguage}
@@ -89,7 +86,7 @@ export const Project: React.FC<TProjectProps> = ({
             value: repositoryForks,
           },
         ].map(({value, icon}, index) => (
-          <Grid key={index} item xs={3} md={3.5}>
+          <Grid key={index} size={{xs: 3, md: 3.5}}>
             <Box sx={{display: 'flex', height: '100%', alignItems: 'center'}}>
               <Typography variant="body2" sx={{display: 'flex', alignItems: 'center', fontSize: '105%'}}>
                 {React.isValidElement(icon) &&

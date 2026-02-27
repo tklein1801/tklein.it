@@ -20,7 +20,7 @@ export const CommitHistoryWrapper: React.FC<TCommitHistoryWrapper> = async ({gri
         {weeks.map((week, index) => {
           return week.contributionDays.map((day, index) => {
             return (
-              <Grid item xs={1} key={index}>
+              <Grid size={1} key={index}>
                 <CommitBox
                   key={day.date}
                   day={new Date(day.date)}

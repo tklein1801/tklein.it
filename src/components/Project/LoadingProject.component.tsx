@@ -13,15 +13,15 @@ export const LoadingProject = () => {
       </React.Fragment>
 
       <Grid container columnSpacing={2} sx={{mt: 1}}>
-        <Grid item xs={6} md={5}>
+        <Grid size={{xs: 6, md: 5}}>
           <Skeleton width={100} variant="rounded" />
         </Grid>
 
-        <Grid item xs={3} md={3.5}>
+        <Grid size={{xs: 3, md: 3.5}}>
           <Skeleton width={'60%'} variant="rounded" />
         </Grid>
 
-        <Grid item xs={3} md={3.5}>
+        <Grid size={{xs: 3, md: 3.5}}>
           <Skeleton width={'60%'} variant="rounded" />
         </Grid>
       </Grid>

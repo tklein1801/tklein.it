@@ -15,7 +15,7 @@ export const Badge: React.FC<TBadgeProps> = ({children, color = 'primary'}) => {
         width: 'fit-content',
         px: 1,
         py: 0.5,
-        borderRadius: theme => theme.shape.borderRadius / 2 + 'px',
+        borderRadius: theme => (theme.shape.borderRadius as number) / 2 + 'px',
         backgroundColor: theme => theme.palette[color].main,
         color: theme => theme.palette[color].contrastText,
       }}>

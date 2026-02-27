@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import {Box, styled} from '@mui/material';
 import {SidebarWidth} from '@/style/theme/constants';
 import {Link} from '@components/Base';
@@ -40,12 +39,7 @@ export const Sidebar = () => {
             url: 'https://github.com/tklein1801/tklein.it',
           },
         ].map(link => (
-          <Link
-            key={link.name}
-            href={link.url}
-            data-umami-event="click-sidebar-link"
-            data-umami-event-href={link.url}
-            sx={{width: 'fit-content'}}>
+          <Link key={link.name} href={link.url} sx={{width: 'fit-content'}}>
             {link.name}
           </Link>
         ))}

@@ -6,14 +6,15 @@ import {Picture} from '@components/Me';
 import {SuspenseProjectWrapper} from '@components/Project';
 import {Timeline} from '@components/Timeline/Timeline';
 import {config} from '@/config';
+import {CommitHistoryWrapper} from '@components/Timeline/CommitHistory';
 
 export default function Home() {
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12} md={12} lg={12} xl={12}>
+      <Grid size={12}>
         <Grid container spacing={3}>
-          <Grid container item xs={12} md={8} order={{xs: 1, md: 0}}>
-            <Grid item xs={12} md={12}>
+          <Grid container size={{xs: 12, md: 8}} order={{xs: 1, md: 0}}>
+            <Grid size={12}>
               <Heading size="large">About me</Heading>
               <Typography>
                 Greetings! I'm a budding software developer, currently undergoing my 3-year apprenticeship @{' '}
@@ -38,34 +39,34 @@ export default function Home() {
               </BlockQuote> */}
             </Grid>
 
-            <Grid item xs={12} md={12}>
+            <Grid size={12}>
               <Heading size="medium">I've worked with...</Heading>
             </Grid>
 
-            <Grid container item xs={12} md={6}>
-              <Grid item xs={12} md={12}>
+            <Grid container size={{xs: 12, md: 6}} spacing={0} sx={{height: 'fit-content'}}>
+              <Grid size={12}>
                 <Heading size="small">Languages</Heading>
               </Grid>
               {config.workedWith.languages.map(lang => (
-                <Grid key={lang.replace(' ', '').toLowerCase()} item xs={6} md={6}>
+                <Grid key={lang.replace(' ', '').toLowerCase()} size={6}>
                   <Typography sx={{':hover': {color: 'primary.main'}}}>{lang}</Typography>
                 </Grid>
               ))}
             </Grid>
 
-            <Grid container item xs={12} md={6}>
-              <Grid item xs={12} md={12}>
+            <Grid container size={{xs: 12, md: 6}} spacing={0} sx={{height: 'fit-content'}}>
+              <Grid size={12}>
                 <Heading size="small">Technologies</Heading>
               </Grid>
               {config.workedWith.technologies.map(lang => (
-                <Grid key={lang.replace(' ', '').toLowerCase()} item xs={6} md={6}>
+                <Grid key={lang.replace(' ', '').toLowerCase()} size={6}>
                   <Typography sx={{':hover': {color: 'primary.main'}}}>{lang}</Typography>
                 </Grid>
               ))}
             </Grid>
           </Grid>
 
-          <Grid item xs={12} md={4} order={{xs: 0, md: 1}}>
+          <Grid size={{xs: 12, md: 4}} order={{xs: 0, md: 1}}>
             <Box sx={{display: 'flex', width: '100%', height: '100%'}}>
               <Picture sx={{m: 'auto', width: {xs: '65%', md: '75%'}}} />
             </Box>
@@ -73,21 +74,21 @@ export default function Home() {
         </Grid>
       </Grid>
 
-      {/* <Grid container item xs={12} md={12}>
-        <Grid item xs={12} md={12}>
+      <Grid container size={12}>
+        <Grid size={12}>
           <Heading size="small">Commits</Heading>
         </Grid>
         <CommitHistoryWrapper />
-      </Grid> */}
+      </Grid>
 
-      <Grid container item xs={12} md={12}>
-        <Grid item xs={12} md={12}>
+      <Grid container size={12}>
+        <Grid size={12}>
           <Heading size="large">My experience</Heading>
         </Grid>
         <Timeline events={config.experience.events} />
       </Grid>
 
-      <Grid item xs={12} md={12} lg={12} xl={12}>
+      <Grid size={12}>
         <Heading size="large">Projects</Heading>
         <SuspenseProjectWrapper />
       </Grid>

@@ -31,13 +31,6 @@ export default function RootLayout({
         <ThemeProvider>
           <DefaultLayout>{children}</DefaultLayout>
         </ThemeProvider>
-        {process.env.NODE_ENV === 'production' && (
-          <Script
-            async
-            src="https://analytics.tools.tklein.it/script.js"
-            data-website-id="faab5301-fe86-4362-8bb5-e51313e9b0f0"
-          />
-        )}
       </body>
     </html>
   );

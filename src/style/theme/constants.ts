@@ -9,8 +9,8 @@ import {
   type TransitionsOptions,
   type ZIndex as MuiZIndex,
 } from '@mui/material';
-import {MixinsOptions} from '@mui/material/styles/createMixins';
-import {TypographyOptions} from '@mui/material/styles/createTypography';
+import {MixinsOptions} from '@mui/material/styles';
+import type {TypographyVariantsOptions} from '@mui/material/styles';
 import {fontFamily} from './font';
 import {config} from '@/config';
 
@@ -96,7 +96,7 @@ export const Components: MuiComponents<Omit<Theme, 'components'>> = {
   },
 };
 
-export const Typography: TypographyOptions = {
+export const Typography: TypographyVariantsOptions = {
   fontFamily: fontFamily,
   allVariants: {
     scrollMarginTop: 'calc(var(--MuiDocs-header-height) + 32px)',

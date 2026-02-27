@@ -11,7 +11,7 @@ export const ProjectWrapper = async () => {
     return (
       <Grid container spacing={3}>
         {projects.map(project => (
-          <Grid item xs={12} md={6} lg={6} xl={4} key={project.id}>
+          <Grid size={{xs: 12, md: 6, lg: 6, xl: 4}} key={project.id}>
             <Project
               repositoryUrl={project.url}
               repositoryName={`@${project.owner.login}/${project.name}`}
@@ -34,7 +34,7 @@ const Loader = () => {
   return (
     <Grid container spacing={3}>
       {Array.from({length: 6}).map((_, index) => (
-        <Grid item xs={12} md={6} lg={6} xl={4} key={index}>
+        <Grid size={{xs: 12, md: 6, lg: 6, xl: 4}} key={index}>
           <LoadingProject />
         </Grid>
       ))}

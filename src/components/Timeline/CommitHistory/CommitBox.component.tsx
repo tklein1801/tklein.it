@@ -20,7 +20,7 @@ export const CommitBox: React.FC<TCommitBoxProps> = ({day, commits, highestContr
           aspectRatio: '1/1',
           border: theme => `1px solid ${theme.palette.divider}`,
           backgroundColor: theme => alpha(theme.palette.primary.main, (commits * 100) / highestContribution).toString(),
-          borderRadius: theme => theme.shape.borderRadius / 2 + 'px',
+          borderRadius: theme => (theme.shape.borderRadius as number) / 2 + 'px',
         }}
       />
     </Tooltip>

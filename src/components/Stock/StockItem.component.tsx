@@ -12,8 +12,6 @@ export const StockItem: React.FC<TStock> = ({symbol, slug, quote}) => {
       <Stack
         component={Link}
         href={`https://www.coinbase.com/de/price/${slug}`}
-        data-umami-event="click-crypto-link"
-        data-umami-event-crypto={symbol}
         target="_blank"
         sx={{
           flexDirection: 'row',

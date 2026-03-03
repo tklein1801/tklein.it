@@ -76,13 +76,6 @@ export default function Home() {
 
       <Grid container size={12}>
         <Grid size={12}>
-          <Heading size="small">Commits</Heading>
-        </Grid>
-        <CommitHistoryWrapper />
-      </Grid>
-
-      <Grid container size={12}>
-        <Grid size={12}>
           <Heading size="large">My experience</Heading>
         </Grid>
         <Timeline events={config.experience.events} />

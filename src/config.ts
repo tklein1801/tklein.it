@@ -23,12 +23,12 @@ export const config = {
   experience: {
     events: [
       {
-        year: 'Jan 2026 - Today',
+        year: 'Jan. 2026 - Today',
         headline: 'Specialist SAP Developer',
         description: "Promoted! I'm working as a Specialist SAP Developer at Tchibo GmbH.",
       },
       {
-        year: 'Jun 2024 - Jan 2026',
+        year: 'Jun. 2024 - Dec. 2026',
         headline: 'Junior Specialist SAP Developer',
         description: "I'm working as a Junior Specialist SAP Developer at Tchibo GmbH.",
       },

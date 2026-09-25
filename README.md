@@ -20,3 +20,7 @@
    # Start the development server
    npm run dev
    ```
+
+## Docker
+
+See [docs/docker.md](docs/docker.md) for instructions to build and run the production container with Docker Compose.

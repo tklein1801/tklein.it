@@ -12,8 +12,8 @@ const slide = keyframes`
   }
 `;
 
-export const TickerContent: React.FC<React.PropsWithChildren<{ref?: React.Ref<unknown>; animationTime?: number}>> =
-  React.forwardRef(({animationTime = 20, children}, ref) => (
+export const TickerContent = React.forwardRef<HTMLDivElement, React.PropsWithChildren<{animationTime?: number}>>(
+  ({animationTime = 20, children}, ref) => (
     <Box
       ref={ref}
       sx={{
@@ -23,4 +23,5 @@ export const TickerContent: React.FC<React.PropsWithChildren<{ref?: React.Ref<un
       }}>
       {children}
     </Box>
-  ));
+  ),
+);

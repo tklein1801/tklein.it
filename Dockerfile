@@ -16,6 +16,9 @@ COPY . .
 RUN npm run build
 
 FROM node:24-alpine AS runner
+
+LABEL org.opencontainers.image.source="https://github.com/tklein1801/tklein.it"
+
 WORKDIR /app
 
 ENV NODE_ENV=production \

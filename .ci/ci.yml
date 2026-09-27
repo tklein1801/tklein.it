@@ -56,6 +56,11 @@ resources:
       owner: ((repo.owner))
       repo: ((repo.name))
       access_token: ((github.pat))
+  - name: timer
+    type: time
+    icon: clock-outline
+    source:
+      interval: 168h
 
 meta:
   gh-status-handlers: &gh-status-handlers
@@ -126,9 +131,11 @@ jobs:
         path: pr-((repo.pr.branch))
         status: error
     plan:
-      - get: pr-((repo.pr.branch))
-        trigger: true
-        version: every
+      - in_parallel:
+          - get: node-image
+          - get: pr-((repo.pr.branch))
+            trigger: true
+            version: every
       - put: pr-((repo.pr.branch))
         params:
           path: pr-((repo.pr.branch))
@@ -141,3 +148,18 @@ jobs:
         params:
           path: pr-((repo.pr.branch))
           status: success
+  - name: update-dependencies
+    public: true
+    plan:
+      - in_parallel:
+          - get: node-image
+          - get: repository
+          - get: timer
+            trigger: true
+      - task: npm-update
+        file: repository/.ci/tasks/update-dependencies.yml
+        input_mapping: {source: repository}
+      - put: repository
+        params:
+          repository: repository
+          rebase: true

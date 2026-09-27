@@ -1,0 +1,143 @@
+groups:
+  - name: all
+    jobs:
+      - '*'
+  - name: build
+    jobs:
+      - build
+
+resource_types:
+  - name: cogito
+    type: registry-image
+    check_every: 24h
+    source:
+      repository: pix4d/cogito
+  - name: github-pr
+    type: registry-image
+    check_every: 24h
+    source:
+      repository: teliaoss/github-pr-resource
+      tag: latest
+
+resources:
+  - name: node-image
+    type: registry-image
+    icon: nodejs
+    source:
+      repository: node
+      tag: 24-alpine
+  - name: repository
+    type: git
+    icon: git
+    source:
+      uri: git@github.com:((repo.owner))/((repo.name)).git
+      private_key: ((github.private_key))
+  - name: pr-((repo.pr.branch))
+    type: github-pr
+    check_every: 1m
+    icon: github
+    source:
+      repository: ((repo.owner))/((repo.name))
+      access_token: ((github.pat))
+      base_branch: ((repo.pr.branch))
+      disable_ci_skip: true
+  - name: container-registry
+    type: docker-image
+    icon: docker
+    source:
+      repository: ghcr.io/((repo.owner))/((repo.name))
+      username: ((docker.username))
+      password: ((docker.password))
+  - name: status
+    type: cogito
+    icon: github
+    check_every: never
+    source:
+      owner: ((repo.owner))
+      repo: ((repo.name))
+      access_token: ((github.pat))
+
+meta:
+  gh-status-handlers: &gh-status-handlers
+    on_success:
+      put: status
+      inputs: [repository]
+      no_get: true
+      params: {state: success}
+    on_failure:
+      put: status
+      inputs: [repository]
+      no_get: true
+      params: {state: failure}
+    on_error:
+      put: status
+      inputs: [repository]
+      no_get: true
+      params: {state: error}
+    on_abort:
+      put: status
+      inputs: [repository]
+      no_get: true
+      params: {state: abort}
+
+jobs:
+  - name: build
+    public: true
+    <<: *gh-status-handlers
+    plan:
+      - in_parallel:
+          - get: node-image
+          - get: repository
+            trigger: true
+      - put: status
+        inputs: [repository]
+        params: {state: pending}
+        no_get: true
+      - task: verify
+        file: repository/.ci/tasks/verify.yml
+        input_mapping: {source: repository}
+      - put: container-registry
+        get_params: {skip_download: true}
+        params:
+          build: repository
+          dockerfile: repository/Dockerfile
+          tag_file: repository/.git/short_ref
+          tag_as_latest: true
+  - name: pull-request
+    public: true
+    on_success:
+      put: pr-((repo.pr.branch))
+      params:
+        path: pr-((repo.pr.branch))
+        status: success
+    on_failure:
+      put: pr-((repo.pr.branch))
+      params:
+        path: pr-((repo.pr.branch))
+        status: failure
+    on_error:
+      put: pr-((repo.pr.branch))
+      params:
+        path: pr-((repo.pr.branch))
+        status: error
+    on_abort:
+      put: pr-((repo.pr.branch))
+      params:
+        path: pr-((repo.pr.branch))
+        status: error
+    plan:
+      - get: pr-((repo.pr.branch))
+        trigger: true
+        version: every
+      - put: pr-((repo.pr.branch))
+        params:
+          path: pr-((repo.pr.branch))
+          status: pending
+      - task: verify
+        file: pr-((repo.pr.branch))/.ci/tasks/verify.yml
+        input_mapping:
+          repository: pr-((repo.pr.branch))
+      - put: pr-((repo.pr.branch))
+        params:
+          path: pr-((repo.pr.branch))
+          status: success

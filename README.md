@@ -24,3 +24,7 @@
 ## Docker
 
 See [docs/docker.md](docs/docker.md) for instructions to build and run the production container with Docker Compose.
+
+## CI
+
+The Concourse pipelines and the staged migration from GitHub Actions are documented in [docs/concourse.md](docs/concourse.md).

@@ -105,6 +105,7 @@ jobs:
           tag_as_latest: true
   - name: pull-request
     public: true
+<<<<<<< HEAD
     on_success:
       put: pr-((repo.pr.branch))
       params:
@@ -125,6 +126,8 @@ jobs:
       params:
         path: pr-((repo.pr.branch))
         status: error
+=======
+>>>>>>> cede926 (ci: use concourse ci instead of gh actions)
     plan:
       - get: pr-((repo.pr.branch))
         trigger: true
@@ -136,8 +139,20 @@ jobs:
       - task: verify
         file: pr-((repo.pr.branch))/.ci/tasks/verify.yml
         input_mapping:
+<<<<<<< HEAD
           repository: pr-((repo.pr.branch))
+=======
+          repo: pr-((repo.pr.branch))
+>>>>>>> cede926 (ci: use concourse ci instead of gh actions)
       - put: pr-((repo.pr.branch))
         params:
           path: pr-((repo.pr.branch))
           status: success
+<<<<<<< HEAD
+=======
+    on_failure:
+      put: pr-((repo.pr.branch))
+      params:
+        path: pr-((repo.pr.branch))
+        status: failure
+>>>>>>> cede926 (ci: use concourse ci instead of gh actions)

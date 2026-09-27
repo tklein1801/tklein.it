@@ -15,8 +15,13 @@ Concourse credential management must provide `github.private_key` (Git access), 
 
 ```sh
 fly -t ci login
+<<<<<<< HEAD
 fly -t ci validate-pipeline -c ./.ci/ci.yml -l ./.ci/vars.yml --strict
 fly -t ci set-pipeline -p tklein.it -c ./.ci/ci.yml -l ./.ci/vars.yml
+=======
+fly -t ci validate-pipeline -c ci/ci.yml -l ci/vars.yml --strict
+fly -t ci set-pipeline -p tklein.it -c ci/ci.yml -l ci/vars.yml
+>>>>>>> cede926 (ci: use concourse ci instead of gh actions)
 fly -t ci unpause-pipeline -p tklein.it
 ```
 

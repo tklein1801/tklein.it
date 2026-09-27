@@ -28,9 +28,10 @@ run:
   args:
     - -exc
     - |
-      apk add --no-cache git
+      apk add --no-cache --no-progress git
       cd repository/
-      npm install
+      npm ci
+      npm update -D
       npm audit fix --force
       npm run lint
       npm run test

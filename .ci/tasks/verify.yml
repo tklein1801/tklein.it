@@ -24,7 +24,7 @@ run:
     - -exc
     - |
       cd repository/
-      npm install
+      npm ci
       npm run lint
       npm run test
       npm run build

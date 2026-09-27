@@ -7,24 +7,20 @@ import {Divider, Skeleton} from '@mui/material';
 import {withSuspense} from '@/hooks';
 
 export const StockWrapper: React.FC = async () => {
-  try {
-    const data = await StocksService.fetchCrypo();
-    if (data.length === 0) return null;
-    return (
-      <React.Fragment>
-        <TickerWrapper>
-          <TickerContent animationTime={data.length * 2}>
-            {[...data, ...data].map((stock, index) => (
-              <StockItem {...stock} key={index} />
-            ))}
-          </TickerContent>
-        </TickerWrapper>
-        <Divider />
-      </React.Fragment>
-    );
-  } catch {
-    return null;
-  }
+  const data = await StocksService.fetchCrypo();
+  if (data.length === 0) return null;
+  return (
+    <React.Fragment>
+      <TickerWrapper>
+        <TickerContent animationTime={data.length * 2}>
+          {[...data, ...data].map((stock, index) => (
+            <StockItem {...stock} key={index} />
+          ))}
+        </TickerContent>
+      </TickerWrapper>
+      <Divider />
+    </React.Fragment>
+  );
 };
 
 const Loader = () => {

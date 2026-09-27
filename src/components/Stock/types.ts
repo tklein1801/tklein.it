@@ -22,7 +22,7 @@ export type TStock = {
   max_supply: number;
   circulating_supply: number;
   total_supply: number;
-  platform: [Object];
+  platform: object | null;
   cmc_rank: number;
   self_reported_circulating_supply: null;
   self_reported_market_cap: null;

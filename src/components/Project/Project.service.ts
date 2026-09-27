@@ -18,9 +18,10 @@ export class ProjectService {
         body: query,
         next: {revalidate: 3600},
       });
-      const json = await response.json();
-      // @ts-ignore
-      return json.data.viewer.pinnedItems.edges.map(node => ({...node.node}));
+      const json = (await response.json()) as {
+        data: {viewer: {pinnedItems: {edges: {node: TProject}[]}}};
+      };
+      return json.data.viewer.pinnedItems.edges.map(({node}) => ({...node}));
     } catch (error) {
       console.error(error);
       return [];

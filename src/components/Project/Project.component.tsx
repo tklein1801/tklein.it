@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import {Box, Grid, Paper, Typography, Link} from '@mui/material';
+import {Box, Grid, Typography, Link} from '@mui/material';
 import {StarRounded, RestaurantRounded} from '@mui/icons-material';
 import {Badge} from '@components/Base';
 
@@ -78,26 +78,18 @@ export const Project: React.FC<TProjectProps> = ({
         </Grid>
         {[
           {
-            icon: <StarRounded />,
+            icon: <StarRounded sx={{fontSize: 'inherit', mr: 0.5}} />,
             value: repositoryStars,
           },
           {
-            icon: <RestaurantRounded />,
+            icon: <RestaurantRounded sx={{fontSize: 'inherit', mr: 0.5}} />,
             value: repositoryForks,
           },
         ].map(({value, icon}, index) => (
           <Grid key={index} size={{xs: 3, md: 3.5}}>
             <Box sx={{display: 'flex', height: '100%', alignItems: 'center'}}>
               <Typography variant="body2" sx={{display: 'flex', alignItems: 'center', fontSize: '105%'}}>
-                {React.isValidElement(icon) &&
-                  React.cloneElement(icon, {
-                    // @ts-ignore
-                    sx: {
-                      fontSize: 'inherit',
-                      mr: 0.5,
-                    },
-                  })}{' '}
-                {value}
+                {icon} {value}
               </Typography>
             </Box>
           </Grid>

@@ -5,29 +5,25 @@ import {LoadingProject} from './LoadingProject.component';
 import {ProjectService} from './Project.service';
 
 export const ProjectWrapper = async () => {
-  try {
-    const projects = await ProjectService.getProjects();
-    if (projects.length === 0) return null;
-    return (
-      <Grid container spacing={3}>
-        {projects.map(project => (
-          <Grid size={{xs: 12, md: 6, lg: 6, xl: 4}} key={project.id}>
-            <Project
-              repositoryUrl={project.url}
-              repositoryName={`@${project.owner.login}/${project.name}`}
-              repositoryDescription={project.description}
-              repositoryLanguage={project.primaryLanguage?.name ?? ''}
-              repositoryLanguageColor={project.primaryLanguage?.color ?? ''}
-              repositoryStars={project.stargazerCount}
-              repositoryForks={project.forkCount}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    );
-  } catch {
-    return null;
-  }
+  const projects = await ProjectService.getProjects();
+  if (projects.length === 0) return null;
+  return (
+    <Grid container spacing={3}>
+      {projects.map(project => (
+        <Grid size={{xs: 12, md: 6, lg: 6, xl: 4}} key={project.id}>
+          <Project
+            repositoryUrl={project.url}
+            repositoryName={`@${project.owner.login}/${project.name}`}
+            repositoryDescription={project.description}
+            repositoryLanguage={project.primaryLanguage?.name ?? ''}
+            repositoryLanguageColor={project.primaryLanguage?.color ?? ''}
+            repositoryStars={project.stargazerCount}
+            repositoryForks={project.forkCount}
+          />
+        </Grid>
+      ))}
+    </Grid>
+  );
 };
 
 const Loader = () => {

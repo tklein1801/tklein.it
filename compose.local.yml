@@ -1,6 +1,9 @@
 services:
   web:
-    image: ghcr.io/tklein1801/tklein.it:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tklein-it:local
     restart: unless-stopped
     ports:
       - '${PORT:-3000}:3000'

@@ -1,0 +1,16 @@
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: alpine
+    tag: '3.22'
+
+outputs:
+  - name: demo-deploy
+
+run:
+  path: sh
+  args:
+    - -ec
+    - touch demo-deploy/worked

@@ -5,6 +5,9 @@ groups:
   - name: build
     jobs:
       - build
+  - name: deploy
+    jobs:
+      - deploy*
 
 resource_types:
   - name: cogito
@@ -18,8 +21,23 @@ resource_types:
     source:
       repository: teliaoss/github-pr-resource
       tag: latest
+  - name: ssh-scp
+    type: registry-image
+    source:
+      repository: ghcr.io/tklein1801/concourse-ssh-scp-resource
 
 resources:
+  - name: server-target
+    type: ssh-scp
+    icon: server
+    check_every: never
+    source:
+      user: ((deployment-vps1.ssh_username))
+      host: ((deployment-vps1.host))
+      known_hosts: |
+        ((deployment-vps1.known_hosts))
+      private_key: |
+        ((deployment-vps1.ssh_private_key))
   - name: node-image
     type: registry-image
     icon: nodejs
@@ -33,6 +51,14 @@ resources:
       uri: git@github.com:((repo.owner))/((repo.name)).git
       branch: main
       private_key: ((github.private_key))
+  - name: ci-source
+    type: git
+    icon: git
+    source:
+      uri: git@github.com:((ci.source.owner))/((ci.source.name)).git
+      branch: ((ci.source.branch))
+      private_key: ((github.private_key))
+      paths: [ci/**]
   - name: pr-((repo.pr.branch))
     type: github-pr
     check_every: 1m
@@ -91,12 +117,13 @@ jobs:
           - get: node-image
           - get: repository
             trigger: true
+          - get: ci-source
       - put: status
         inputs: [repository]
         params: {state: pending}
         no_get: true
       - task: verify
-        file: repository/.ci/tasks/verify.yml
+        file: ci-source/ci/tasks/verify.task.yml
         input_mapping: {source: repository}
       - put: container-registry
         get_params: {skip_download: true}
@@ -105,6 +132,24 @@ jobs:
           dockerfile: repository/Dockerfile
           tag_file: repository/.git/short_ref
           tag_as_latest: true
+  - name: deploy
+    plan:
+      - in_parallel:
+          - get: repository
+            passed: [build]
+            trigger: false
+          - get: ci-source
+      - task: deploy
+        file: ci-source/ci/tasks/deploy.task.yml
+      - put: server-target
+        inputs: [demo-deploy]
+        no_get: true
+        params:
+          files:
+            'demo-deploy/worked': 'worked'
+          commands:
+            - 'whoami'
+            - 'ls -la'
   - name: pull-request
     public: true
     on_success:
@@ -133,12 +178,13 @@ jobs:
           - get: pr-((repo.pr.branch))
             trigger: true
             version: every
+          - get: ci-source
       - put: pr-((repo.pr.branch))
         params:
           path: pr-((repo.pr.branch))
           status: pending
       - task: verify
-        file: pr-((repo.pr.branch))/.ci/tasks/verify.yml
+        file: ci-source/ci/tasks/verify.task.yml
         input_mapping:
           repository: pr-((repo.pr.branch))
       - put: pr-((repo.pr.branch))
@@ -151,10 +197,11 @@ jobs:
       - in_parallel:
           - get: node-image
           - get: repository
+          - get: ci-source
           - get: timer
             trigger: true
       - task: npm-update
-        file: repository/.ci/tasks/update-dependencies.yml
+        file: ci-source/ci/tasks/update-dependencies.task.yml
         params:
           GIT_NAME: ((git.name))
           GIT_EMAIL: ((git.email))

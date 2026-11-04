@@ -6,3 +6,8 @@ repo:
   name: tklein.it
   pr:
     branch: main
+ci:
+  source:
+    owner: tklein1801
+    name: tklein.it
+    branch: main

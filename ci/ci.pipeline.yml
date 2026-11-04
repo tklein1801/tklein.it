@@ -38,12 +38,6 @@ resources:
         ((deployment-vps1.known_hosts))
       private_key: |
         ((deployment-vps1.ssh_private_key))
-  - name: node-image
-    type: registry-image
-    icon: nodejs
-    source:
-      repository: node
-      tag: 24-alpine
   - name: repository
     type: git
     icon: git
@@ -115,7 +109,6 @@ jobs:
       params: {state: abort}
     plan:
       - in_parallel:
-          - get: node-image
           - get: repository
             trigger: true
           - get: ci-source
@@ -201,7 +194,6 @@ jobs:
         status: error
     plan:
       - in_parallel:
-          - get: node-image
           - get: pr-((repo.pr.branch))
             trigger: true
             version: every
@@ -222,7 +214,6 @@ jobs:
     public: true
     plan:
       - in_parallel:
-          - get: node-image
           - get: repository
           - get: ci-source
           - get: timer

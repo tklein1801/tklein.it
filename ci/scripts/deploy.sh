@@ -1,5 +1,6 @@
 #!/bin/sh
 set -eu
+set +x
 
 fail() {
   printf '%s\n' "$*" >&2
@@ -42,9 +43,16 @@ compose() {
 }
 
 cleanup() {
+  set +e
+  cleanup_failed=0
   [ -z "$temp_file" ] || rm -f "$temp_file"
   [ -z "$backup_file" ] || rm -f "$backup_file"
+  if [ -n "$docker_config_dir" ]; then
+    rm -f "$docker_config_dir/config.json" || { printf '%s\n' "Cannot remove temporary Docker credentials: $docker_config_dir" >&2; cleanup_failed=1; }
+    rmdir "$docker_config_dir" || { printf '%s\n' "Cannot remove temporary Docker directory: $docker_config_dir" >&2; cleanup_failed=1; }
+  fi
   rmdir .deploy.lock
+  [ "$cleanup_failed" -eq 0 ] || exit 1
 }
 
 initialize_deployment() {
@@ -57,6 +65,7 @@ initialize_deployment() {
   mkdir .deploy.lock 2>/dev/null || fail "Deployment is already running or .deploy.lock cannot be created"
   temp_file=
   backup_file=
+  docker_config_dir=
   trap cleanup 0
   trap 'exit 1' HUP INT TERM
   temp_file=$(mktemp .deploy-image.XXXXXX) || fail "Cannot create deployment state file"
@@ -105,6 +114,22 @@ rollback() {
 
 pull_image() {
   docker pull "$image" || fail "Image pull failed; running service was not changed"
+}
+
+login_registry() {
+  [ -d .registry-credentials ] && [ ! -L .registry-credentials ] || fail "Registry credentials directory is required"
+  [ -f .registry-credentials/username ] && [ -r .registry-credentials/username ] || fail "Readable registry username is required"
+  [ -f .registry-credentials/password ] && [ -r .registry-credentials/password ] || fail "Readable registry password is required"
+  registry_username=$(cat .registry-credentials/username) || fail "Cannot read registry username"
+  [ -n "$registry_username" ] || fail "Registry username is empty"
+  umask 077
+  docker_config_dir=$(mktemp -d) || fail "Cannot create Docker configuration directory"
+  DOCKER_CONFIG=$docker_config_dir
+  export DOCKER_CONFIG
+  docker_binary=$(command -v docker)
+  docker_binary=$(CDPATH= cd "$(dirname "$docker_binary")" && pwd -P)/$(basename "$docker_binary")
+  # Prevent Docker from discovering a host credential helper.
+  PATH="$docker_config_dir" "$docker_binary" login ghcr.io --username "$registry_username" --password-stdin < .registry-credentials/password >/dev/null 2>&1 || fail "Registry login failed; running service was not changed"
 }
 
 start_and_wait() {
@@ -161,6 +186,7 @@ check_requirements
 initialize_deployment
 validate_compose
 backup_current_deployment
+login_registry
 pull_image
 start_and_wait
 save_deployment

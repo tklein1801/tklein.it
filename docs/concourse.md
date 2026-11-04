@@ -31,7 +31,9 @@ The pipeline creates the deployment directory if it does not exist. The SSH user
 
 The deployment uses a Compose project name derived from the server directory. It does not adopt an existing service from another Compose project. Stop or migrate such a service before the first deployment, especially if it already uses the configured port.
 
-If the GHCR package is private, authenticate the SSH user on the server with a separate read-only registry credential. The deployment does not transfer registry credentials.
+The deploy job uses `docker.username` and `docker.password` from Concourse credential management to authenticate to GHCR on the server. The credential must allow reading the package. The SSH user must be able to create private directories in the deployment directory. The deployment uses a temporary Docker configuration and removes the transferred credentials after use. Only one pipeline or manual deployment may use this directory at a time.
+
+If a server or worker failure interrupts cleanup, `.registry-credentials` or a temporary Docker configuration may remain. Check and remove stale credentials securely before retrying. A stale `.registry-credentials` directory blocks a new deployment rather than overwriting existing files.
 
 ## Deployment and rollback
 

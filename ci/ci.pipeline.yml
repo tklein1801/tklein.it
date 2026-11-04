@@ -91,6 +91,7 @@ resources:
 
 jobs:
   - name: build
+    serial: true
     public: true
     on_success:
       put: status
@@ -133,23 +134,38 @@ jobs:
           tag_file: repository/.git/short_ref
           tag_as_latest: true
   - name: deploy
+    serial: true
     plan:
       - in_parallel:
           - get: repository
             passed: [build]
-            trigger: false
+          - get: container-registry
+            passed: [build]
+            trigger: true
+            params: {skip_download: true}
           - get: ci-source
       - task: deploy
         file: ci-source/ci/tasks/deploy.task.yml
+        params:
+          DEPLOY_PATH: ((deployment.path))
+      - load_var: deploy-image
+        file: deploy-files/image-ref
+        format: trim
       - put: server-target
-        inputs: [demo-deploy]
+        inputs: []
+        no_get: true
+        params:
+          commands:
+            - "mkdir -p -- '((deployment.path))'"
+      - put: server-target
+        inputs: [deploy-files]
         no_get: true
         params:
           files:
-            'demo-deploy/worked': 'worked'
+            'deploy-files/compose.next.yml': '((deployment.path))/compose.next.yml'
+            'deploy-files/deploy.next.sh': '((deployment.path))/deploy.next.sh'
           commands:
-            - 'whoami'
-            - 'ls -la'
+            - "sh '((deployment.path))/deploy.next.sh' '((deployment.path))' '((.:deploy-image))'"
   - name: pull-request
     public: true
     on_success:

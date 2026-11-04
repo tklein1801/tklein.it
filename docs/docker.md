@@ -17,10 +17,10 @@ Set `COINMARKETCAP` to a CoinMarketCap API key and `GH_PAT` to a GitHub personal
 
 ## Build and run
 
-From the repository root, run:
+To build and run locally, use the local override from the repository root:
 
 ```sh
-docker compose up --build -d
+docker compose -f compose.yml -f compose.local.yml up --build -d
 ```
 
 Open <http://localhost:3000>. To use a different host port, set `PORT` in the shell when starting Compose:
@@ -40,7 +40,7 @@ docker compose down
 
 The Dockerfile uses three stages. The dependencies stage installs the exact packages in `package-lock.json`. The builder stage copies the app and runs `next build`. The runner stage contains only the standalone server, its traced runtime dependencies, and static assets. This keeps build tooling out of the production image.
 
-`output: "standalone"` in `next.config.js` tells Next.js to produce the minimal server bundle. The container starts it with `node server.js` on port 3000. Compose publishes that container port to the selected host port and checks `/api/status` for health.
+`output: "standalone"` in `next.config.js` tells Next.js to produce the minimal server bundle. The container starts it with `node server.js` on port 3000. Compose publishes that container port to the selected host port and checks `/api/status` for health. The production Compose file accepts `DEPLOY_IMAGE` and defaults to the `latest` GHCR image. CI sets it to an exact digest; see [Concourse CI](concourse.md).
 
 ## Environment variables and secrets
 

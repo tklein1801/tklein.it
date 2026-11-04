@@ -11,3 +11,5 @@ ci:
     owner: tklein1801
     name: tklein.it
     branch: main
+deployment:
+  path: services/tklein.it

@@ -1,6 +1,6 @@
 services:
   web:
-    image: ghcr.io/tklein1801/tklein.it:latest
+    image: ${DEPLOY_IMAGE:-ghcr.io/tklein1801/tklein.it:latest}
     restart: unless-stopped
     ports:
       - '${PORT:-3000}:3000'

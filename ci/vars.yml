@@ -13,3 +13,10 @@ ci:
     branch: main
 deployment:
   path: services/tklein.it
+  project: tklein-it-340514132
+  compose_file: compose.yml
+  service: web
+  health_timeout: '60'
+  registry:
+    host: ghcr.io
+    login_required: 'true'

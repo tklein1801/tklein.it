@@ -13,7 +13,7 @@ The pipeline is defined in `ci/ci.pipeline.yml`. Non-secret values are in `ci/va
 
 Concourse credential management must provide `github.private_key`, `github.pat`, `docker.username`, and `docker.password`. The SSH resource also requires `deployment-vps1.ssh_username`, `deployment-vps1.host`, `deployment-vps1.known_hosts`, and `deployment-vps1.ssh_private_key`. Keep credentials out of `ci/vars.yml`.
 
-Set `deployment.path` in `ci/vars.yml` to an absolute server path. Use only letters, digits, `_`, `-`, `.`, and `/`. The SSH user must be able to create and write this directory.
+Configure `deployment.path`, `deployment.project`, `deployment.compose_file`, `deployment.service`, `deployment.health_timeout`, and `deployment.registry` in `ci/vars.yml`. The path is relative to the SSH user's home directory. Use only letters, digits, `_`, `-`, `.`, and `/`. The SSH user must be able to create and write this directory.
 
 ```sh
 fly -t ci validate-pipeline -c ./ci/ci.pipeline.yml -l ./ci/vars.yml --strict
@@ -27,17 +27,17 @@ The deploy job triggers after a successful image build. Both build and deploy jo
 
 Install Docker Engine and the Docker Compose plugin on the target server. The Compose plugin must support `up --wait` and `--wait-timeout`. The SSH user needs access to Docker without an interactive password. Configure the SSH host key in `deployment-vps1.known_hosts`.
 
-The pipeline creates the deployment directory if it does not exist. The SSH user needs permission to create it in its parent directory. Create `.env` in that directory before the first successful deployment. Set `COINMARKETCAP` and `GH_PAT` as described in `.env.example`. Optionally set `PORT` for the host port. Restrict access to the file. The deployment does not overwrite it and fails if it is missing.
+The pipeline creates the deployment directory if it does not exist. The SSH user needs permission to create it in its parent directory. Runtime files referenced by Compose must exist in the deployment directory. Keep local Compose paths relative to the repository so the pipeline can transfer them. Supply runtime configuration files such as `.env` in the deployment directory before deployment. The deployment does not overwrite these runtime configuration files.
 
 The deployment uses a Compose project name derived from the server directory. It does not adopt an existing service from another Compose project. Stop or migrate such a service before the first deployment, especially if it already uses the configured port.
 
-The deploy job uses `docker.username` and `docker.password` from Concourse credential management to authenticate to GHCR on the server. The credential must allow reading the package. The SSH user must be able to create private directories in the deployment directory. The deployment uses a temporary Docker configuration and removes the transferred credentials after use. Only one pipeline or manual deployment may use this directory at a time.
+When `deployment.registry.login_required` is true, the deploy job uses `docker.username` and `docker.password` from Concourse credential management to authenticate to `deployment.registry.host` on the server. The credential must allow reading the package. The SSH user must be able to create private directories in the deployment directory. The deployment uses a temporary Docker configuration and removes the transferred credentials after use. Only one pipeline or manual deployment may use this directory at a time.
 
 If a server or worker failure interrupts cleanup, `.registry-credentials` or a temporary Docker configuration may remain. Check and remove stale credentials securely before retrying. A stale `.registry-credentials` directory blocks a new deployment rather than overwriting existing files.
 
 ## Deployment and rollback
 
-The deploy job receives the repository and image digest from the same successful build. It passes the complete digest reference to Compose through `DEPLOY_IMAGE`. It never uses `latest` for a deployment.
+The deploy job receives the repository and image digest from the same successful build. It creates a Compose override for the configured service and passes the complete digest reference. It never uses `latest` for a deployment. Other services in the Compose file are allowed, but the deployment updates only the configured service. Build-backed services must not rely on a `build:` directive because deployment runs Compose with `--no-build`.
 
 The server pulls the selected image before replacing the running container. Compose then waits up to 60 seconds for the container healthcheck. A failed update attempts to restore the previous successful deployment and waits for it to become healthy. A first deployment has no previous version to restore. A single Compose service can still have a short interruption during replacement.
 

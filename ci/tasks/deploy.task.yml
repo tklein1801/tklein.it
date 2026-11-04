@@ -17,6 +17,12 @@ outputs:
 
 params:
   DEPLOY_PATH:
+  DEPLOY_SERVICE:
+  DEPLOY_COMPOSE_FILE:
+  DEPLOY_PROJECT:
+  DEPLOY_HEALTH_TIMEOUT:
+  REGISTRY_HOST:
+  REGISTRY_LOGIN_REQUIRED:
   REGISTRY_USERNAME:
   REGISTRY_PASSWORD:
 
@@ -27,17 +33,46 @@ run:
     - -c
     - |
       case "$DEPLOY_PATH" in
-        *[!a-zA-Z0-9_./-]*|*/../*|*/..|*/./*|*/.|/)
+        ''|*[!a-zA-Z0-9_./-]*|../*|*/../*|*/..|*/./*|*/.|/)
           echo 'DEPLOY_PATH contains unsupported characters or components' >&2; exit 1 ;;
       esac
+      case "$DEPLOY_COMPOSE_FILE" in
+        ''|/*|*[!a-zA-Z0-9_./-]*) echo 'Invalid DEPLOY_COMPOSE_FILE' >&2; exit 1 ;;
+      esac
+      [ -f "repository/$DEPLOY_COMPOSE_FILE" ] || { echo 'Compose file not found in repository' >&2; exit 1; }
+      case "$DEPLOY_SERVICE" in
+        ''|*[!a-zA-Z0-9_.-]*) echo 'Invalid DEPLOY_SERVICE' >&2; exit 1 ;;
+      esac
+      case "$DEPLOY_PROJECT" in
+        ''|*[!a-zA-Z0-9_-]*) echo 'Invalid DEPLOY_PROJECT' >&2; exit 1 ;;
+      esac
+      case "$DEPLOY_HEALTH_TIMEOUT" in
+        ''|*[!0-9]*) echo 'Invalid DEPLOY_HEALTH_TIMEOUT' >&2; exit 1 ;;
+      esac
+      case "$REGISTRY_HOST" in
+        ''|*[!a-zA-Z0-9.-]*) echo 'Invalid REGISTRY_HOST' >&2; exit 1 ;;
+      esac
+      case "$REGISTRY_LOGIN_REQUIRED" in
+        true|false) ;;
+        *) echo 'REGISTRY_LOGIN_REQUIRED must be true or false' >&2; exit 1 ;;
+      esac
+      mkdir -p deploy-files
       repository=$(cat container-registry/repository)
       digest=$(cat container-registry/digest)
       printf '%s\n' "$repository" | grep -Eq '^[a-zA-Z0-9][a-zA-Z0-9._/-]*$'
       printf '%s\n' "$digest" | grep -Eq '^sha256:[a-f0-9]{64}$'
+      case "$repository" in *[!a-zA-Z0-9._/-]*) echo 'Invalid image repository' >&2; exit 1 ;; esac
       printf '%s@%s\n' "$repository" "$digest" > deploy-files/image-ref
-      cp repository/compose.yml deploy-files/compose.next.yml
+      cp "repository/$DEPLOY_COMPOSE_FILE" deploy-files/compose.next.yml
+      cp -R repository/. deploy-files/repository/
+      printf 'services:\n  "%s":\n    image: "%s@%s"\n' "$DEPLOY_SERVICE" "$repository" "$digest" > deploy-files/image-override.yml
       cp ci-source/ci/scripts/deploy.sh deploy-files/deploy.next.sh
-      [ -n "$REGISTRY_USERNAME" ] && [ -n "$REGISTRY_PASSWORD" ] || { echo 'Registry credentials are required' >&2; exit 1; }
-      umask 077
-      printf '%s' "$REGISTRY_USERNAME" > registry-credentials/username
-      printf '%s' "$REGISTRY_PASSWORD" > registry-credentials/password
+      if [ "$REGISTRY_LOGIN_REQUIRED" = true ]; then
+        [ -n "$REGISTRY_USERNAME" ] && [ -n "$REGISTRY_PASSWORD" ] || { echo 'Registry credentials are required' >&2; exit 1; }
+        umask 077
+        printf '%s' "$REGISTRY_USERNAME" > registry-credentials/username
+        printf '%s' "$REGISTRY_PASSWORD" > registry-credentials/password
+      else
+        : > registry-credentials/username
+        : > registry-credentials/password
+      fi

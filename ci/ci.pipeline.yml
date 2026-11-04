@@ -140,6 +140,12 @@ jobs:
         file: ci-source/ci/tasks/deploy.task.yml
         params:
           DEPLOY_PATH: ((deployment.path))
+          DEPLOY_SERVICE: ((deployment.service))
+          DEPLOY_COMPOSE_FILE: ((deployment.compose_file))
+          DEPLOY_PROJECT: ((deployment.project))
+          DEPLOY_HEALTH_TIMEOUT: ((deployment.health_timeout))
+          REGISTRY_HOST: ((deployment.registry.host))
+          REGISTRY_LOGIN_REQUIRED: ((deployment.registry.login_required))
           REGISTRY_USERNAME: ((docker.username))
           REGISTRY_PASSWORD: ((docker.password))
       - load_var: deploy-image
@@ -157,19 +163,21 @@ jobs:
             no_get: true
             params:
               files:
-                'deploy-files/compose.next.yml': '((deployment.path))/compose.next.yml'
+                'deploy-files/compose.next.yml': '((deployment.path))/.compose.next.yml'
+                'deploy-files/image-override.yml': '((deployment.path))/.image-override.next.yml'
+                'deploy-files/repository': '((deployment.path))/repository'
                 'deploy-files/deploy.next.sh': '((deployment.path))/deploy.next.sh'
                 'registry-credentials/username': '((deployment.path))/.registry-credentials/username'
                 'registry-credentials/password': '((deployment.path))/.registry-credentials/password'
               commands:
-                - "sh '((deployment.path))/deploy.next.sh' '((deployment.path))' '((.:deploy-image))'"
+                - "sh '((deployment.path))/deploy.next.sh' '((deployment.path))' '((.:deploy-image))' '((deployment.compose_file))' '((deployment.service))' '((deployment.project))' '((deployment.health_timeout))' '((deployment.registry.host))' '((deployment.registry.login_required))'"
         ensure:
           put: server-target
           inputs: []
           no_get: true
           params:
             commands:
-              - "rm -f -- '((deployment.path))/.registry-credentials/username' '((deployment.path))/.registry-credentials/password' && if [ -d '((deployment.path))/.registry-credentials' ]; then rmdir -- '((deployment.path))/.registry-credentials'; fi"
+              - "if [ -d '((deployment.path))/.registry-credentials' ]; then rm -f -- '((deployment.path))/.registry-credentials/username' '((deployment.path))/.registry-credentials/password' && rmdir -- '((deployment.path))/.registry-credentials'; fi"
   - name: pull-request
     public: true
     on_success:

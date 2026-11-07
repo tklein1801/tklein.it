@@ -42,6 +42,8 @@ The Dockerfile uses three stages. The dependencies stage installs the exact pack
 
 `output: "standalone"` in `next.config.js` tells Next.js to produce the minimal server bundle. The container starts it with `node server.js` on port 3000. Compose publishes that container port to the selected host port and checks `/api/status` for health. The production Compose file accepts `DEPLOY_IMAGE` and defaults to the `latest` GHCR image. CI sets it to an exact digest; see [Concourse CI](concourse.md).
 
+The `/api/ip` endpoint reads the first address from `X-Forwarded-For`. For accurate results, place the app behind a trusted reverse proxy that replaces client-supplied `X-Forwarded-For` values with the actual client address, and prevent clients from accessing the app directly. Without this setup, the reported address may be spoofed or may be a proxy address.
+
 ## Environment variables and secrets
 
 `COINMARKETCAP` and `GH_PAT` are read by server-side services at request time. The home page is configured as dynamic, so the credentials are not needed while building the image. Compose loads them from `.env` only when the container starts. Do not pass credentials as Docker build arguments or copy `.env` into the image.

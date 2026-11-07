@@ -1,13 +1,18 @@
-import {NextResponse} from 'next/server';
+import {isIP} from 'node:net';
 
 export function GET(req: Request) {
-  const userAgent = req.headers.get('user-agent');
-  if (!userAgent) return NextResponse.redirect('/');
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim();
+  const headers = {
+    'Content-Type': 'text/plain; charset=utf-8',
+    'Cache-Control': 'no-store',
+  };
 
-  if (!userAgent.includes('curl')) {
-    return NextResponse.redirect('/');
+  if (!ip || !isIP(ip)) {
+    return new Response('IP address unavailable\n', {status: 503, headers});
   }
-  const ip = req.headers.get('x-forwarded-for');
-  const userIp = ip?.split(',')[0].trim();
-  return new Response(userIp, {headers: {'Content-Type': 'text/plain'}});
+
+  const browser = req.headers.get('accept')?.includes('text/html');
+  return new Response(`${browser ? 'Hello ' : ''}${ip}\n`, {headers});
 }
+
+export const POST = GET;

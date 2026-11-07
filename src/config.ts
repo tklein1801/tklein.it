@@ -1,6 +1,20 @@
 export const config = {
   name: 'Thorben Klein',
   username: 'tklein1801',
+  about: [
+    [
+      {text: "Greetings! I'm a budding software developer, currently undergoing my 3-year apprenticeship @ "},
+      {text: 'Tchibo GmbH', href: 'https://tchibo-karriere.de/'},
+      {
+        text: ". I'm fascinated by the world of programming and all things tech-related, and I'm currently exploring the exciting realm of ",
+      },
+      {text: 'SAP development', href: 'https://sap.com/'},
+      {
+        text: ". If you're curious to know more about my past projects and endeavors, feel free to check out my portfolio on this website!",
+      },
+    ],
+    [{text: "Let's dive into the world of software development together and create something amazing!"}],
+  ] as {text: string; href?: string}[][],
   workedWith: {
     languages: ['TypeScript', 'JavaScript', 'PHP', 'ABAP', 'SQL', 'Java', 'Go', 'HTML & CSS'],
     technologies: [

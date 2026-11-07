@@ -17,21 +17,20 @@ export default function Home() {
             <Grid size={12}>
               <Heading size="large">About me</Heading>
               <Typography>
-                Greetings! I'm a budding software developer, currently undergoing my 3-year apprenticeship @{' '}
-                <Link href="https://tchibo-karriere.de/" target="_blank">
-                  Tchibo GmbH
-                </Link>
-                . I'm fascinated by the world of programming and all things tech-related, and I'm currently exploring
-                the exciting realm of{' '}
-                <Link href="https://sap.com/" target="_blank">
-                  SAP development
-                </Link>
-                . If you're curious to know more about my past projects and endeavors, feel free to check out my
-                portfolio on this website!
-                <br /> <br />
-                Let's dive into the world of software development together and create something amazing!
-                <br />
-                <br />
+                {config.about.map((paragraph, index) => (
+                  <span key={index}>
+                    {paragraph.map(part =>
+                      part.href ? (
+                        <Link key={part.text} href={part.href} target="_blank">
+                          {part.text}
+                        </Link>
+                      ) : (
+                        part.text
+                      ),
+                    )}
+                    <br /> <br />
+                  </span>
+                ))}
               </Typography>
 
               {/* <BlockQuote>

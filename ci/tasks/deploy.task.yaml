@@ -8,7 +8,6 @@ image_resource:
 
 inputs:
   - name: repository
-  - name: ci-source
   - name: container-registry
 
 outputs:
@@ -36,7 +35,7 @@ run:
       printf '%s\n' "$digest" | grep -Eq '^sha256:[a-f0-9]{64}$'
       printf '%s@%s\n' "$repository" "$digest" > deploy-files/image-ref
       cp repository/compose.yml deploy-files/compose.next.yml
-      cp ci-source/ci/scripts/deploy.sh deploy-files/deploy.next.sh
+      cp repository/ci/scripts/deploy.sh deploy-files/deploy.next.sh
       [ -n "$REGISTRY_USERNAME" ] && [ -n "$REGISTRY_PASSWORD" ] || { echo 'Registry credentials are required' >&2; exit 1; }
       umask 077
       printf '%s' "$REGISTRY_USERNAME" > registry-credentials/username

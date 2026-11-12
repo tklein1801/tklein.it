@@ -1,0 +1,26 @@
+platform: linux
+image_resource:
+  type: registry-image
+  source:
+    repository: node
+    tag: alpine
+inputs:
+  - name: repository
+outputs:
+  - name: repository
+caches:
+  - path: node_modules
+params:
+  CI: 'true'
+  FORCE_COLOR: 1
+  NPM_CONFIG_FUND: 'false'
+run:
+  path: sh
+  dir: repository
+  args:
+    - -ecx
+    - |
+      npm ci
+      npm run lint
+      npm test
+      npm run build

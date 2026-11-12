@@ -1,6 +1,6 @@
 # Concourse CI
 
-The pipeline is defined in `ci/ci.pipeline.yml`. Non-secret values are in `ci/vars.yml`.
+The pipeline is defined in `ci/pipeline.yaml`. Non-secret values are in `ci/vars.yml`.
 
 | Job | Behavior |
 | --- | --- |
@@ -16,8 +16,8 @@ Concourse credential management must provide `github.private_key`, `github.pat`,
 Set `deployment.path` in `ci/vars.yml` to an absolute server path. Use only letters, digits, `_`, `-`, `.`, and `/`. The SSH user must be able to create and write this directory.
 
 ```sh
-fly -t ci validate-pipeline -c ./ci/ci.pipeline.yml -l ./ci/vars.yml --strict
-fly -t ci set-pipeline -p tklein.it -c ./ci/ci.pipeline.yml -l ./ci/vars.yml
+fly -t ci validate-pipeline -c ./ci/pipeline.yaml -l ./ci/vars.yml --strict
+fly -t ci set-pipeline -p tklein.it -c ./ci/pipeline.yaml -l ./ci/vars.yml
 fly -t ci unpause-pipeline -p tklein.it
 ```
 

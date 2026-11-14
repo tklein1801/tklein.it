@@ -11,18 +11,3 @@ dependency-update:
   interval: 168h
 deployment:
   path: services/tklein.it
-# git:
-#   name: Thorben
-#   email: 38816229+tklein1801@users.noreply.github.com
-# repo:
-#   owner: tklein1801
-#   name: tklein.it
-#   pr:
-#     branch: main
-# ci:
-#   source:
-#     owner: tklein1801
-#     name: tklein.it
-#     branch: main
-# deployment:
-#   path: services/tklein.it

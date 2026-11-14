@@ -4,7 +4,7 @@ The pipeline is defined in `ci/pipeline.yaml`. Non-secret values are in `ci/vars
 
 | Job | Behavior |
 | --- | --- |
-| `build` | Verify the repository and push the image to GHCR with the short commit hash and `latest`. |
+| `build` | Verify the repository and push the image to GHCR with the short commit hash. |
 | `deploy` | Deploy the image digest from a successful build over SSH. |
 | `pull-request` | Verify pull requests and report their status. |
 | `update-dependencies` | Periodically update dependencies and push changes to the repository. |

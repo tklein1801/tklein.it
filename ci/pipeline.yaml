@@ -114,7 +114,7 @@ jobs:
           build: repository
           dockerfile: repository/Dockerfile
           tag_file: repository/.git/short_ref
-          tag_as_latest: true
+          tag_as_latest: false
   - name: deploy
     serial: true
     plan:
